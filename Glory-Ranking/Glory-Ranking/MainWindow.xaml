@@ -18,23 +18,55 @@
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
                 </Style>
-                
+
                 <Style TargetType="TabItem">
                     <Setter Property="Width" Value="200"/>
                     <Setter Property="Height" Value="50"/>
                 </Style>
             </TabControl.Resources>
 
-            <TabItem Header="Leaderboard">
+            <TabItem Header="Leaderboard" RenderTransformOrigin="0.5,0.5">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-30"/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="Edit Fighter">
+            <TabItem Header="Edit Fighter" RenderTransformOrigin="0.5,0.5">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-5"/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="Add Fight">
+            <TabItem Header="Add Fight" RenderTransformOrigin="0.5,0.5">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="15"/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="Edit json">
+            <TabItem Header="Edit json" RenderTransformOrigin="0.5,0.5">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="30"/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
