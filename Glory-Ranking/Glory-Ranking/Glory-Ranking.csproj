@@ -13,8 +13,4 @@
     <None Remove="Schermafbeelding 2025-09-09 105242.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Schermafbeelding 2025-09-09 105242.png" />
-  </ItemGroup>
-
 </Project>

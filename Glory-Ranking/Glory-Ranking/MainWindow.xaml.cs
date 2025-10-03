@@ -1,13 +1,6 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Glory_Ranking
 {
@@ -16,6 +9,27 @@ namespace Glory_Ranking
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string _name = ((TabItem)((TabControl)sender).SelectedItem).Name;
+            if(_name == "leaderboard")
+            {
+                
+            }
+            else if(_name == "fighter")
+            {
+                
+            }
+            else if(_name == "fight")
+            {
+                
+            }
+            else if(_name == "json")
+            {
+                
+            }
         }
     }
 }
