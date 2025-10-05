@@ -23,7 +23,7 @@
                 </Style>
             </TabControl.Resources>
 
-            <TabItem x:Name="leaderboard" Header="Leaderboard" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF6D6D6D">
+            <TabItem Header="Leaderboard" RenderTransformOrigin="0.5,0.5" BorderBrush="Black">
                 <TabItem.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -33,11 +33,29 @@
                     </TransformGroup>
                 </TabItem.RenderTransform>
                 <Grid Background="White">
-                    <ListBox av:ItemsSource="{av:SampleData ItemCount=5}" Margin="167,83,219,83"/>
+                    <ListBox x:Name="leaderboardBox" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="20,85,20,10" BorderBrush="Black"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="450" BorderBrush="Black">
+                        <ComboBox.Background>
+                            <LinearGradientBrush EndPoint="0,1">
+                                <GradientStop Color="#FFF0F0F0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                    </ComboBox>
+                    <CheckBox x:Name="retiredCheckbox" Content="Retired&#xD;&#xA;fighters" HorizontalAlignment="Left" Margin="495,38,0,0" VerticalAlignment="Top" Height="33" Width="81" BorderBrush="Black" FontWeight="Bold" FontSize="13" IsChecked="False" RenderTransformOrigin="0.647,0.567">
+                        <CheckBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1.15" ScaleY="1.15"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="2.426" Y="0.332"/>
+                            </TransformGroup>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
                 </Grid>
             </TabItem>
 
-            <TabItem x:Name="fighter" Header="Edit Fighter" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF6D6D6D">
+            <TabItem Header="Edit Fighter" RenderTransformOrigin="0.5,0.5" BorderBrush="Black">
                 <TabItem.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -49,7 +67,7 @@
                 <Grid Background="White"/>
             </TabItem>
 
-            <TabItem x:Name="fight" Header="Add Fight" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF6D6D6D">
+            <TabItem Header="Add Fight" RenderTransformOrigin="0.5,0.5" BorderBrush="Black">
                 <TabItem.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -61,7 +79,7 @@
                 <Grid Background="White"/>
             </TabItem>
 
-            <TabItem x:Name="json" Header="Edit JSON" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF6D6D6D">
+            <TabItem Header="Edit JSON" RenderTransformOrigin="0.5,0.5" BorderBrush="Black">
                 <TabItem.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

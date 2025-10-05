@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Glory-Ranking.csproj": {}
+    "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Glory-Ranking.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Glory-Ranking.csproj": {
+    "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Glory-Ranking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Glory-Ranking.csproj",
+        "projectUniqueName": "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Glory-Ranking.csproj",
         "projectName": "Glory-Ranking",
-        "projectPath": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Glory-Ranking.csproj",
+        "projectPath": "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Glory-Ranking.csproj",
         "packagesPath": "C:\\Users\\joahv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\obj\\",
+        "outputPath": "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -68,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

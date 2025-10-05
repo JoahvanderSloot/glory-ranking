@@ -13,4 +13,8 @@
     <None Remove="Schermafbeelding 2025-09-09 105242.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+
 </Project>
