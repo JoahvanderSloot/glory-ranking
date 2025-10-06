@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Glory-Ranking")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa95bacd9b2ee6f49a4d235ec6692e073de4a739")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ce5ec7aeacb7d661eb26ed75e22a3b305b4a7d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Glory-Ranking")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Glory-Ranking")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

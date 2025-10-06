@@ -48,7 +48,7 @@
                         <ComboBoxItem FontWeight="Normal">Featherweight</ComboBoxItem>
                         <ComboBoxItem FontWeight="Normal">All weightclasses</ComboBoxItem>
                     </ComboBox>
-                    <TextBox x:Name="ChooseDivPrev" Text="Choose Division"
+                    <TextBox x:Name="chooseDivPrev" Text="Choose Division"
              IsHitTestVisible="False"
              Background="{x:Null}"
              Panel.ZIndex="999"
@@ -77,7 +77,7 @@
                     </TransformGroup>
                 </TabItem.RenderTransform>
                 <Grid Background="White">
-                    <TextBox x:Name="searchBox" HorizontalAlignment="Left" Margin="81,52,0,0" VerticalAlignment="Top" Width="154" Height="30" BorderBrush="Black" Background="#7BCFCFCF" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" FontSize="15" VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" Text="s">
+                    <TextBox x:Name="searchBox" HorizontalAlignment="Left" Margin="81,52,0,0" VerticalAlignment="Top" Width="154" Height="30" BorderBrush="Black" Background="#7BCFCFCF" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" FontSize="15" VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" TextChanged="searchBox_TextChanged">
                         <TextBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleY="1.8" ScaleX="1.8"/>
@@ -88,6 +88,60 @@
                         </TextBox.RenderTransform>
                     </TextBox>
                     <Label x:Name="txtSearchPlaceholder" Content="Search fighter..." Background="Transparent" Opacity="0.5" IsHitTestVisible="False" Margin="19,46,0,0" VerticalAlignment="Top" Height="48" HorizontalAlignment="Left" Width="170" VerticalContentAlignment="Center"/>
+                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,140,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
+                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,200,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
+                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,260,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
+                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,320,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
+                    <TextBlock x:Name="fighterName" HorizontalAlignment="Left"  Margin="19,140,0,0" Text="Name..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                    <TextBlock x:Name="fighterWeightclass" HorizontalAlignment="Left"  Margin="19,200,0,0" TextWrapping="Wrap" Text="Weightclass..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False"/>
+                    <TextBlock x:Name="fighterElo" HorizontalAlignment="Left"  Margin="19,260,0,0" TextWrapping="Wrap" Text="Ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False"/>
+                    <TextBlock x:Name="fighterPeakElo" HorizontalAlignment="Left"  Margin="19,320,0,0" TextWrapping="Wrap" Text="Peak ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False"/>
+                    <Button Content=""
+        HorizontalAlignment="Left"
+        Margin="302,142,0,0"
+        VerticalAlignment="Top"
+        Height="36"
+        Width="35"
+        BorderBrush="{x:Null}" Foreground="{x:Null}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Assets/EditButtonSprite.png" />
+
+                        </Button.Background>
+
+                        <Button.RenderTransform>
+                            <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1" />
+                        </Button.RenderTransform>
+                        <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="1.1" Duration="0:0:0.1" />
+                                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="1.1" Duration="0:0:0.1" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="1" Duration="0:0:0.1" />
+                                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="1" Duration="0:0:0.1" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Grid>
             </TabItem>
 

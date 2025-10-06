@@ -10,11 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\EditButtonSprite.png" />
+    <None Remove="EditButtonSprite.png" />
     <None Remove="Schermafbeelding 2025-09-09 105242.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\" />
+    <Resource Include="Assets\EditButtonSprite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
