@@ -6,16 +6,23 @@ namespace Glory_Ranking
 {
     public partial class MainWindow : Window
     {
-        //Frontend variables
+        //Leaderboard UI elements
         ListBox leaderboard;
-
-        //Backend varieables
+        ComboBox divisionBox;
+        TextBox chooseDivPreset;
 
         public MainWindow()
         {
             InitializeComponent();
 
             leaderboard = leaderboardBox;
+            divisionBox = leaderboardDivision;
+            chooseDivPreset = ChooseDivPrev;
+        }
+
+        private void leaderboardDivision_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            chooseDivPreset.Visibility = divisionBox.SelectedItem == null ? Visibility.Visible : Visibility.Hidden;
         }
     }
 }

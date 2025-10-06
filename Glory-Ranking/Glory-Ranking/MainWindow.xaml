@@ -34,21 +34,33 @@
                 </TabItem.RenderTransform>
                 <Grid Background="White">
                     <ListBox x:Name="leaderboardBox" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="20,85,20,10" BorderBrush="Black"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="450" BorderBrush="Black">
+                    <ComboBox x:Name="leaderboardDivision" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="277" BorderBrush="Black" RenderTransformOrigin="0.5,0.5" Text="Division" Foreground="Black" SelectionChanged="leaderboardDivision_SelectionChanged">
                         <ComboBox.Background>
                             <LinearGradientBrush EndPoint="0,1">
                                 <GradientStop Color="#FFF0F0F0"/>
                                 <GradientStop Color="White" Offset="1"/>
                             </LinearGradientBrush>
                         </ComboBox.Background>
+                        <ComboBoxItem FontWeight="Normal">Heavyweight</ComboBoxItem>
+                        <ComboBoxItem FontWeight="Normal">Light heavyweight</ComboBoxItem>
+                        <ComboBoxItem FontWeight="Normal">Middelweight</ComboBoxItem>
+                        <ComboBoxItem FontWeight="Normal">Welterweight</ComboBoxItem>
+                        <ComboBoxItem FontWeight="Normal">Featherweight</ComboBoxItem>
+                        <ComboBoxItem FontWeight="Normal">All weightclasses</ComboBoxItem>
                     </ComboBox>
-                    <CheckBox x:Name="retiredCheckbox" Content="Retired&#xD;&#xA;fighters" HorizontalAlignment="Left" Margin="495,38,0,0" VerticalAlignment="Top" Height="33" Width="81" BorderBrush="Black" FontWeight="Bold" FontSize="13" IsChecked="False" RenderTransformOrigin="0.647,0.567">
+                    <TextBox x:Name="ChooseDivPrev" Text="Choose Division"
+             IsHitTestVisible="False"
+             Background="{x:Null}"
+             Panel.ZIndex="999"
+             Margin="20,38,297,0"
+             VerticalAlignment="Top" Height="33" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF868686" SelectionTextBrush="{x:Null}"/>
+                    <CheckBox x:Name="retiredCheckbox" Content="Retired&#xD;&#xA;fighters" HorizontalAlignment="Left" Margin="307,38,0,0" VerticalAlignment="Top" Height="33" Width="81" BorderBrush="Black" FontWeight="Bold" FontSize="13" IsChecked="False" RenderTransformOrigin="0.305,0.63">
                         <CheckBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1.15" ScaleY="1.15"/>
                                 <SkewTransform/>
                                 <RotateTransform/>
-                                <TranslateTransform X="2.426" Y="0.332"/>
+                                <TranslateTransform X="-1.728" Y="0.644"/>
                             </TransformGroup>
                         </CheckBox.RenderTransform>
                     </CheckBox>
@@ -64,7 +76,19 @@
                         <TranslateTransform Y="80"/>
                     </TransformGroup>
                 </TabItem.RenderTransform>
-                <Grid Background="White"/>
+                <Grid Background="White">
+                    <TextBox x:Name="searchBox" HorizontalAlignment="Left" Margin="81,52,0,0" VerticalAlignment="Top" Width="154" Height="30" BorderBrush="Black" Background="#7BCFCFCF" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" FontSize="15" VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" Text="s">
+                        <TextBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1.8" ScaleX="1.8"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBox.RenderTransform>
+                    </TextBox>
+                    <Label x:Name="txtSearchPlaceholder" Content="Search fighter..." Background="Transparent" Opacity="0.5" IsHitTestVisible="False" Margin="19,46,0,0" VerticalAlignment="Top" Height="48" HorizontalAlignment="Left" Width="170" VerticalContentAlignment="Center"/>
+                </Grid>
             </TabItem>
 
             <TabItem Header="Add Fight" RenderTransformOrigin="0.5,0.5" BorderBrush="Black">
