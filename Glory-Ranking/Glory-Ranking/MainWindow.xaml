@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="Glory_Ranking.MainWindow"
-        Title="MainWindow" Height="450" Width="800" MinWidth="600" MinHeight="450" Background="#FFEBEBEB">
+        Title="MainWindow" Height="450" Width="800" MinWidth="615" MinHeight="450"  MaxWidth="800" MaxHeight="500" Background="#FFEBEBEB">
     <Grid>
         <TabControl TabStripPlacement="Left" Background="#FFEBEBEB" BorderBrush="#FFE9E9E9" Foreground="#FFEDEDED">
             <TabControl.Resources>
@@ -52,7 +52,7 @@
              IsHitTestVisible="False"
              Background="{x:Null}"
              Panel.ZIndex="999"
-             Margin="20,38,297,0"
+             Margin="20,38,175,0"
              VerticalAlignment="Top" Height="33" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF868686" SelectionTextBrush="{x:Null}"/>
                     <CheckBox x:Name="retiredCheckbox" Content="Retired&#xD;&#xA;fighters" HorizontalAlignment="Left" Margin="307,38,0,0" VerticalAlignment="Top" Height="33" Width="81" BorderBrush="Black" FontWeight="Bold" FontSize="13" IsChecked="False" RenderTransformOrigin="0.305,0.63">
                         <CheckBox.RenderTransform>
@@ -77,7 +77,11 @@
                     </TransformGroup>
                 </TabItem.RenderTransform>
                 <Grid Background="White">
-                    <TextBox x:Name="searchBox" HorizontalAlignment="Left" Margin="81,52,0,0" VerticalAlignment="Top" Width="154" Height="30" BorderBrush="Black" Background="#7BCFCFCF" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" FontSize="15" VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" TextChanged="searchBox_TextChanged">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="19*"/>
+                        <RowDefinition Height="88*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="searchBox" HorizontalAlignment="Left" Margin="81,52,0,0" VerticalAlignment="Top" Width="154" Height="30" BorderBrush="Black" Background="#7BCFCFCF" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" FontSize="15" VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" TextChanged="searchBox_TextChanged" Grid.RowSpan="2">
                         <TextBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleY="1.8" ScaleX="1.8"/>
@@ -87,43 +91,54 @@
                             </TransformGroup>
                         </TextBox.RenderTransform>
                     </TextBox>
-                    <Label x:Name="txtSearchPlaceholder" Content="Search fighter..." Background="Transparent" Opacity="0.5" IsHitTestVisible="False" Margin="19,46,0,0" VerticalAlignment="Top" Height="48" HorizontalAlignment="Left" Width="170" VerticalContentAlignment="Center"/>
-                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,140,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
-                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,200,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
-                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,260,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
-                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,320,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
-                    <TextBlock x:Name="fighterName" HorizontalAlignment="Left"  Margin="19,140,0,0" Text="Name..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
-                    <TextBlock x:Name="fighterWeightclass" HorizontalAlignment="Left"  Margin="19,200,0,0" TextWrapping="Wrap" Text="Weightclass..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False"/>
-                    <TextBlock x:Name="fighterElo" HorizontalAlignment="Left"  Margin="19,260,0,0" TextWrapping="Wrap" Text="Ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False"/>
-                    <TextBlock x:Name="fighterPeakElo" HorizontalAlignment="Left"  Margin="19,320,0,0" TextWrapping="Wrap" Text="Peak ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False"/>
-                    <Button Content=""
+                    <Label x:Name="txtSearchPlaceholder" Content="Search fighter..." Background="Transparent" Opacity="0.5" IsHitTestVisible="False" Margin="19,46,0,0" VerticalAlignment="Top" Height="48" HorizontalAlignment="Left" Width="170" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
+                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,64,0,0" Stroke="Black" VerticalAlignment="Top" Width="278" Grid.Row="1"/>
+                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,124,0,0" Stroke="Black" VerticalAlignment="Top" Width="278" Grid.Row="1"/>
+                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,184,0,0" Stroke="Black" VerticalAlignment="Top" Width="278" Grid.Row="1"/>
+                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,244,0,0" Stroke="Black" VerticalAlignment="Top" Width="278" Grid.Row="1"/>
+                    <TextBox x:Name="fighterName" HorizontalAlignment="Left"  Margin="19,64,0,0" Text="Name..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" ScrollViewer.VerticalScrollBarVisibility="Hidden" IsEnabled="False" Background="{x:Null}" BorderBrush="Black" SelectionBrush="#FF7797B1" SelectionTextBrush="{x:Null}" Grid.Row="1"/>
+                    <TextBox x:Name="fighterWeightclass" HorizontalAlignment="Left"  Margin="19,124,0,0" TextWrapping="Wrap" Text="Weightclass..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionBrush="#FF7797B1" SelectionTextBrush="{x:Null}" Grid.Row="1"/>
+                    <TextBox x:Name="fighterElo" HorizontalAlignment="Left"  Margin="19,184,0,0" TextWrapping="Wrap" Text="Ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionTextBrush="{x:Null}" SelectionBrush="#FF7797B1" Grid.Row="1"/>
+                    <TextBox x:Name="fighterPeakElo" HorizontalAlignment="Left"  Margin="19,244,0,0" TextWrapping="Wrap" Text="Peak ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionBrush="#FF7797B1" SelectionTextBrush="{x:Null}" Grid.Row="1"/>
+                    <Button x:Name="editNameButton" Content=""
         HorizontalAlignment="Left"
-        Margin="302,142,0,0"
+        Margin="302,66,0,0"
         VerticalAlignment="Top"
         Height="36"
         Width="35"
-        BorderBrush="{x:Null}" Foreground="{x:Null}">
+        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Grid.Row="1">
                         <Button.Background>
                             <ImageBrush ImageSource="/Assets/EditButtonSprite.png" />
-
                         </Button.Background>
-
                         <Button.RenderTransform>
                             <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1" />
                         </Button.RenderTransform>
                         <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                    </Button>
+                    <Button x:Name="setNameButton" Content=""
+                        HorizontalAlignment="Left"
+                        Margin="302,66,0,0"
+                        VerticalAlignment="Top"
+                        Height="36"
+                        Width="35"
+                        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Background="#FF7BFF00" Grid.Row="1">
+
+                        <Button.RenderTransform>
+                            <ScaleTransform x:Name="scaleTransform1" ScaleX="1" ScaleY="1" />
+                        </Button.RenderTransform>
+                        <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
 
                         <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Trigger.EnterActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
                                                     <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
-                                                 To="1.1" Duration="0:0:0.1" />
+                                                        To="1.1" Duration="0:0:0.1" />
                                                     <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
-                                                 To="1.1" Duration="0:0:0.1" />
+                                                        To="1.1" Duration="0:0:0.1" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </Trigger.EnterActions>
@@ -131,9 +146,9 @@
                                             <BeginStoryboard>
                                                 <Storyboard>
                                                     <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
-                                                 To="1" Duration="0:0:0.1" />
+                                                        To="1" Duration="0:0:0.1" />
                                                     <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
-                                                 To="1" Duration="0:0:0.1" />
+                                                        To="1" Duration="0:0:0.1" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </Trigger.ExitActions>
@@ -142,6 +157,64 @@
                             </Style>
                         </Button.Style>
                     </Button>
+                    <Button x:Name="setWeightButton" Content=""
+                        HorizontalAlignment="Left"
+                        Margin="302,126,0,0"
+                        VerticalAlignment="Top"
+                        Height="36"
+                        Width="35"
+                        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Background="#FF7BFF00" Grid.Row="1">
+
+                        <Button.RenderTransform>
+                            <ScaleTransform x:Name="scaleTransform2" ScaleX="1" ScaleY="1" />
+                        </Button.RenderTransform>
+                        <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                        To="1.1" Duration="0:0:0.1" />
+                                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                                        To="1.1" Duration="0:0:0.1" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                        To="1" Duration="0:0:0.1" />
+                                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                                        To="1" Duration="0:0:0.1" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button x:Name="editWeightButton" Content=""
+                        HorizontalAlignment="Left"
+                        Margin="303,126,0,0"
+                        VerticalAlignment="Top"
+                        Height="36"
+                        Width="34"
+                        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Grid.Row="1">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Assets/EditButtonSprite.png" />
+                        </Button.Background>
+                        <Button.RenderTransform>
+                            <ScaleTransform x:Name="scaleTransform3" ScaleX="1" ScaleY="1" />
+                        </Button.RenderTransform>
+                        <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                    </Button>
+                    <CheckBox x:Name="checkRetiredOrNot" Content="Active" HorizontalAlignment="Left" Margin="19,38,0,0" VerticalAlignment="Top" Height="21" Background="{x:Null}" BorderBrush="Black" FontWeight="DemiBold" FontSize="15" IsChecked="False" Grid.Row="1" IsEnabled="False" Foreground="Silver"/>
                 </Grid>
             </TabItem>
 
@@ -154,7 +227,30 @@
                         <TranslateTransform Y="120"/>
                     </TransformGroup>
                 </TabItem.RenderTransform>
-                <Grid Background="White"/>
+                <Grid Background="White">
+                    <Expander x:Name="newFighterWeight" HorizontalAlignment="Left" Height="202" Header="Weightclass" Margin="19,77,0,0" VerticalAlignment="Top" Width="278" BorderBrush="{x:Null}" FontWeight="DemiBold" Background="{x:Null}">
+                        <Grid Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70*"/>
+                                <ColumnDefinition Width="139*"/>
+                                <ColumnDefinition Width="67*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Background="White" Grid.ColumnSpan="3" Margin="0,0,0,40">
+                                <RadioButton x:Name="weightHeavy" Content="Heavyweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
+                                <RadioButton x:Name="weightLightHeavy" Content="Light heavyweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
+                                <RadioButton x:Name="weightMiddle" Content="Middleweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
+                                <RadioButton x:Name="weightWelter" Content="Welterweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
+                                <RadioButton x:Name="weightFeather" Content="Featherweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
+                                <RadioButton x:Name="weightNone" Content="None" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+                    <Rectangle HorizontalAlignment="Left" Height="34" Margin="19,38,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
+                    <Label Content="Add new fighter" HorizontalAlignment="Left" Margin="19,38,0,0" VerticalAlignment="Top" Height="34" Width="278" FontWeight="Bold" VerticalContentAlignment="Center" FontSize="18"/>
+                    <TextBox x:Name="newFighterNameInput" HorizontalAlignment="Left" Margin="19,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Height="41" VerticalContentAlignment="Center" FontWeight="Normal" FontStyle="Italic" BorderBrush="Black" SelectionTextBrush="{x:Null}" Background="{x:Null}" TextChanged="newFighterNameInput_TextChanged"/>
+                    <Label x:Name="newFighterNameOverlay" Content="New fighter name..." HorizontalAlignment="Left" Margin="19,112,0,0" VerticalAlignment="Top" Width="278" FontWeight="Normal" FontStyle="Italic" IsEnabled="False" Panel.ZIndex="-1" VerticalContentAlignment="Center"/>
+                    <Button x:Name="submitNewFighterButton" Content="&gt;" HorizontalAlignment="Left" Margin="302,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,-0.071" Height="34" Width="34" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="Black"/>
+                </Grid>
             </TabItem>
 
             <TabItem Header="Edit JSON" RenderTransformOrigin="0.5,0.5" BorderBrush="Black">
