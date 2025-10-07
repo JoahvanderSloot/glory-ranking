@@ -4,7 +4,7 @@
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="Glory_Ranking.MainWindow"
         Title="MainWindow" Height="450" Width="800" MinWidth="615" MinHeight="450"  MaxWidth="800" MaxHeight="500" Background="#FFEBEBEB">
     <Grid>
-        <TabControl TabStripPlacement="Left" Background="#FFEBEBEB" BorderBrush="#FFE9E9E9" Foreground="#FFEDEDED">
+        <TabControl TabStripPlacement="Left" Background="#FFEBEBEB" BorderBrush="#FFE9E9E9" Foreground="#FFEDEDED" SelectionChanged="TabControl_SelectionChanged">
             <TabControl.Resources>
                 <Style TargetType="{x:Type TabControl}">
                     <Setter Property="FontSize" Value="20"/>
@@ -228,7 +228,15 @@
                     </TransformGroup>
                 </TabItem.RenderTransform>
                 <Grid Background="White">
-                    <Expander x:Name="newFighterWeight" HorizontalAlignment="Left" Height="202" Header="Weightclass" Margin="19,77,0,0" VerticalAlignment="Top" Width="278" BorderBrush="{x:Null}" FontWeight="DemiBold" Background="{x:Null}">
+                    <Expander x:Name="newFighterWeight" HorizontalAlignment="Left" Height="202" Header="Weightclass" Margin="-1,77,0,0" VerticalAlignment="Top" Width="298" BorderBrush="{x:Null}" FontWeight="DemiBold" Background="{x:Null}" Panel.ZIndex="1" RenderTransformOrigin="0.5,0.5" Padding="17, 0, 0, 0">
+                        <Expander.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="1"/>
+                            </TransformGroup>
+                        </Expander.RenderTransform>
                         <Grid Background="White">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="70*"/>
@@ -236,7 +244,7 @@
                                 <ColumnDefinition Width="67*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Background="White" Grid.ColumnSpan="3" Margin="0,0,0,40">
-                                <RadioButton x:Name="weightHeavy" Content="Heavyweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
+                                <RadioButton x:Name="weightHeavy" Content="Heavyweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked" IsChecked="False"/>
                                 <RadioButton x:Name="weightLightHeavy" Content="Light heavyweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
                                 <RadioButton x:Name="weightMiddle" Content="Middleweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
                                 <RadioButton x:Name="weightWelter" Content="Welterweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
@@ -247,9 +255,13 @@
                     </Expander>
                     <Rectangle HorizontalAlignment="Left" Height="34" Margin="19,38,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
                     <Label Content="Add new fighter" HorizontalAlignment="Left" Margin="19,38,0,0" VerticalAlignment="Top" Height="34" Width="278" FontWeight="Bold" VerticalContentAlignment="Center" FontSize="18"/>
-                    <TextBox x:Name="newFighterNameInput" HorizontalAlignment="Left" Margin="19,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Height="41" VerticalContentAlignment="Center" FontWeight="Normal" FontStyle="Italic" BorderBrush="Black" SelectionTextBrush="{x:Null}" Background="{x:Null}" TextChanged="newFighterNameInput_TextChanged"/>
+                    <TextBox x:Name="newFighterNameInput" HorizontalAlignment="Left" Margin="19,112,0,0" VerticalAlignment="Top" Width="278" Height="41" VerticalContentAlignment="Center" FontWeight="Normal" FontStyle="Italic" BorderBrush="Black" SelectionTextBrush="{x:Null}" Background="{x:Null}" TextChanged="newFighterNameInput_TextChanged"/>
                     <Label x:Name="newFighterNameOverlay" Content="New fighter name..." HorizontalAlignment="Left" Margin="19,112,0,0" VerticalAlignment="Top" Width="278" FontWeight="Normal" FontStyle="Italic" IsEnabled="False" Panel.ZIndex="-1" VerticalContentAlignment="Center"/>
-                    <Button x:Name="submitNewFighterButton" Content="&gt;" HorizontalAlignment="Left" Margin="302,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,-0.071" Height="34" Width="34" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="Black"/>
+                    <Button x:Name="submitNewFighterButton" Content="&gt;" HorizontalAlignment="Left" Margin="302,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,-0.071" Height="34" Width="34" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="Black" Click="Button_Click" IsEnabled="False"/>
+                    <TextBlock x:Name="fighterAddedInfoText" HorizontalAlignment="Left" Margin="19,153,0,0" VerticalAlignment="Top" Width="317" Height="23" FontSize="16" FontWeight="Light" FontStyle="Italic"/>
+                    <Rectangle HorizontalAlignment="Left" Height="34" Margin="19,176,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
+                    <Label Content="Add fight outcome" HorizontalAlignment="Left" Margin="19,176,0,0" VerticalAlignment="Top" Height="34" Width="278" FontWeight="Bold" VerticalContentAlignment="Center" FontSize="18"/>
+                    <Button x:Name="submitFightButton" Content="&gt;" HorizontalAlignment="Left" Margin="302,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,-0.071" Height="34" Width="34" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="Black" Click="Button_Click" IsEnabled="False"/>
                 </Grid>
             </TabItem>
 

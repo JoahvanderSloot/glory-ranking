@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 
 namespace Glory_Ranking
 {
@@ -31,6 +32,8 @@ namespace Glory_Ranking
         Expander newFighterWeightclass;
         TextBox newFighterName;
         Label newFighterTextOverlay;
+        Button SubmitNewFighter;
+        TextBlock figterAddedInfo;
         List<RadioButton> weightOptions = new List<RadioButton>();
 
         public MainWindow()
@@ -64,6 +67,8 @@ namespace Glory_Ranking
             newFighterWeightclass = newFighterWeight;
             newFighterName = newFighterNameInput;
             newFighterTextOverlay = newFighterNameOverlay;
+            SubmitNewFighter = submitNewFighterButton;
+            figterAddedInfo = fighterAddedInfoText;
             weightOptions.AddRange(new[] { weightHeavy, weightLightHeavy, weightMiddle, weightWelter, weightFeather, weightNone });
         }
 
@@ -155,13 +160,27 @@ namespace Glory_Ranking
 
             if(_button.Name == "submitNewFighterButton")
             {
-                if(newFighterWeightclass.Header != "Weightclass" && newFighterName.Text != "")
+                for(int i = 0; i < weightOptions.Count; i++)
                 {
-                    testName = newFighterName.Text;
-                    testWeight = newFighterWeightclass.Header.ToString();
-                    newFighterWeightclass.Header = "Weightclass";
-                    newFighterName.Text = "";
-                    newFighterTextOverlay.Visibility = Visibility.Visible;
+                    if (weightOptions[i].IsChecked == true && newFighterName.Text != "")
+                    {
+                        if(newFighterName.Text != "ExistingFighter")
+                        {
+                            fighterAddedInfoText.Foreground = Brushes.Lime;
+                            figterAddedInfo.Text = "New fighter added: " + newFighterName.Text;
+                            testName = newFighterName.Text;
+                            testWeight = weightClasses[i];
+                            weightOptions[i].IsChecked = false;
+                            newFighterWeightclass.Header = "Weightclass";
+                            newFighterName.Text = "";
+                            newFighterTextOverlay.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            fighterAddedInfoText.Foreground = Brushes.Red;
+                            figterAddedInfo.Text = "Fighter " + newFighterName.Text + "already exists";
+                        }
+                    }
                 }
             }
         }
@@ -175,6 +194,10 @@ namespace Glory_Ranking
                 {
                     newFighterWeightclass.Header = weight.Content;
                     newFighterWeightclass.IsExpanded = false;
+                    if(newFighterName.Text != "")
+                    {
+                        SubmitNewFighter.IsEnabled = true;
+                    }
                 }
             }
         }
@@ -184,11 +207,48 @@ namespace Glory_Ranking
             if(newFighterName.Text == "")
             {
                 newFighterTextOverlay.Visibility = Visibility.Visible;
+                SubmitNewFighter.IsEnabled = false;
             }
             else
             {
                 newFighterTextOverlay.Visibility = Visibility.Hidden;
+                foreach(var weight in weightOptions)
+                {
+                    if(weight.IsChecked == true)
+                    {
+                        SubmitNewFighter.IsEnabled = true;
+                    }
+                }
             }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            //Reset edit page
+            newFighterWeightclass.IsExpanded = false;
+            newFighterWeightclass.Header = "Weightclass";
+            newFighterName.Text = "";
+            newFighterTextOverlay.Visibility = Visibility.Visible;
+            figterAddedInfo.Text = null;
+            foreach (var weight in weightOptions)
+            {
+                weight.IsChecked = false;
+            }
+
+            //Reset search page
+            searchFighter.Text = "";
+            editName.Visibility = Visibility.Hidden;
+            editWeight.Visibility = Visibility.Hidden;
+            setName.Visibility = Visibility.Hidden;
+            setWeight.Visibility = Visibility.Hidden;
+            active.IsEnabled = false;
+            active.Foreground = Brushes.Silver;
+            active.IsChecked = false;
+            searchInfo[0].Text = "Name...";
+            searchInfo[1].Text = "Weightclass...";
+            searchInfo[2].Text = "Ranking...";
+            searchInfo[3].Text = "Peak ranking...";
         }
     }
 }
