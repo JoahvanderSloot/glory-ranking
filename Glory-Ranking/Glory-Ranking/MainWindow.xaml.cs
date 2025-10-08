@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
+using System.Printing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -35,6 +36,13 @@ namespace Glory_Ranking
         Button SubmitNewFighter;
         TextBlock figterAddedInfo;
         List<RadioButton> weightOptions = new List<RadioButton>();
+        //Add Fight UI elements
+        TextBox winner;
+        TextBox loser;
+        Label winnerOverlay;
+        Label loserOverlay;
+        Label newFightOutput;
+        Button addFight;
 
         public MainWindow()
         {
@@ -61,7 +69,7 @@ namespace Glory_Ranking
             setWeight.Visibility = Visibility.Hidden;
 
             //Assign search info elements
-            searchInfo.AddRange(new[]{ fighterName, fighterWeightclass, fighterElo, fighterPeakElo });
+            searchInfo.AddRange(new[] { fighterName, fighterWeightclass, fighterElo, fighterPeakElo });
 
             //Assign add fighter elements
             newFighterWeightclass = newFighterWeight;
@@ -70,6 +78,14 @@ namespace Glory_Ranking
             SubmitNewFighter = submitNewFighterButton;
             figterAddedInfo = fighterAddedInfoText;
             weightOptions.AddRange(new[] { weightHeavy, weightLightHeavy, weightMiddle, weightWelter, weightFeather, weightNone });
+
+            //Assign add fight elements
+            winner = winnerTextInput;
+            loser = loserTextInput;
+            winnerOverlay = winnerTextOverlay;
+            loserOverlay = loserTextOverlay;
+            newFightOutput = newFightOutputLabel;
+            addFight = submitFightButton;
         }
 
         private void leaderboardDivision_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,7 +97,7 @@ namespace Glory_Ranking
         {
             searchPrev.Visibility = searchFighter.Text == "" ? Visibility.Visible : Visibility.Hidden;
 
-            if(searchFighter.Text == testName)
+            if (searchFighter.Text == testName)
             {
                 foreach (var item in searchInfo)
                 {
@@ -99,7 +115,7 @@ namespace Glory_Ranking
             }
             else
             {
-                foreach(var item in searchInfo)
+                foreach (var item in searchInfo)
                 {
                     item.Foreground = Brushes.Silver;
                     item.IsEnabled = false;
@@ -127,7 +143,7 @@ namespace Glory_Ranking
                 editName.Visibility = Visibility.Hidden;
                 setName.Visibility = Visibility.Visible;
             }
-            else if(_button.Name == "setNameButton")
+            else if (_button.Name == "setNameButton")
             {
                 testName = searchInfo[0].Text;
                 searchInfo[0].IsEnabled = false;
@@ -143,7 +159,7 @@ namespace Glory_Ranking
             }
             else if (_button.Name == "setWeightButton")
             {
-                foreach(var weight in weightClasses)
+                foreach (var weight in weightClasses)
                 {
                     if (searchInfo[1].Text == weight)
                     {
@@ -158,13 +174,13 @@ namespace Glory_Ranking
                 }
             }
 
-            if(_button.Name == "submitNewFighterButton")
+            if (_button.Name == "submitNewFighterButton")
             {
-                for(int i = 0; i < weightOptions.Count; i++)
+                for (int i = 0; i < weightOptions.Count; i++)
                 {
                     if (weightOptions[i].IsChecked == true && newFighterName.Text != "")
                     {
-                        if(newFighterName.Text != "ExistingFighter")
+                        if (newFighterName.Text != "ExistingFighter")
                         {
                             fighterAddedInfoText.Foreground = Brushes.Lime;
                             figterAddedInfo.Text = "New fighter added: " + newFighterName.Text;
@@ -183,18 +199,25 @@ namespace Glory_Ranking
                     }
                 }
             }
+            else if (_button.Name == "submitFightButton")
+            {
+                newFightOutput.Content = "Fight added " + winner.Text + " defeated " + loser.Text;
+                addFight.IsEnabled = false;
+                winner.Text = "";
+                loser.Text = "";
+            }
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton _button = (RadioButton)sender;
-            foreach(var weight in weightOptions)
+            foreach (var weight in weightOptions)
             {
-                if(_button.Name == weight.Name)
+                if (_button.Name == weight.Name)
                 {
                     newFighterWeightclass.Header = weight.Content;
                     newFighterWeightclass.IsExpanded = false;
-                    if(newFighterName.Text != "")
+                    if (newFighterName.Text != "")
                     {
                         SubmitNewFighter.IsEnabled = true;
                     }
@@ -204,7 +227,7 @@ namespace Glory_Ranking
 
         private void newFighterNameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(newFighterName.Text == "")
+            if (newFighterName.Text == "")
             {
                 newFighterTextOverlay.Visibility = Visibility.Visible;
                 SubmitNewFighter.IsEnabled = false;
@@ -212,9 +235,9 @@ namespace Glory_Ranking
             else
             {
                 newFighterTextOverlay.Visibility = Visibility.Hidden;
-                foreach(var weight in weightOptions)
+                foreach (var weight in weightOptions)
                 {
-                    if(weight.IsChecked == true)
+                    if (weight.IsChecked == true)
                     {
                         SubmitNewFighter.IsEnabled = true;
                     }
@@ -222,10 +245,55 @@ namespace Glory_Ranking
             }
         }
 
+        private void fightInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Name == "winnerTextInput")
+            {
+                if (winner.Text != "")
+                {
+                    winnerOverlay.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    winnerOverlay.Visibility = Visibility.Visible;
+                }
+            }
+            else if (textBox.Name == "loserTextInput")
+            {
+                if (loser.Text != "")
+                {
+                    loserOverlay.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    loserOverlay.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (loser.Text != "" && winner.Text != "")
+            {
+                if (loser.Text == winner.Text)
+                {
+                    newFightOutput.Content = "Winner and loser cant be the same fighter";
+                    addFight.IsEnabled = false;
+                }
+                else
+                {
+                    newFightOutput.Content = "";
+                    addFight.IsEnabled = true;
+                }
+            }
+            else
+            {
+                addFight.IsEnabled = false;
+            }
+        }
+
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            //Reset edit page
+            //Reset add page
             newFighterWeightclass.IsExpanded = false;
             newFighterWeightclass.Header = "Weightclass";
             newFighterName.Text = "";
@@ -235,6 +303,10 @@ namespace Glory_Ranking
             {
                 weight.IsChecked = false;
             }
+            winner.Text = "";
+            loser.Text = "";
+            newFightOutput.Content = null;
+
 
             //Reset search page
             searchFighter.Text = "";
