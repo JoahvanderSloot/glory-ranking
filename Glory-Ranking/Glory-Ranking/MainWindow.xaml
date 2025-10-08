@@ -261,7 +261,7 @@
                     <Button x:Name="submitNewFighterButton" HorizontalAlignment="Left" Margin="302,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,-0.071" Height="34" Width="34" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Foreground="{x:Null}">
                         <Image Height="30" Width="30" Source="/Assets/AddButtonSprite.png"/>
                     </Button>
-                    <TextBlock x:Name="fighterAddedInfoText" HorizontalAlignment="Left" Margin="19,153,0,0" VerticalAlignment="Top" Width="317" Height="23" FontSize="16" FontWeight="Light" FontStyle="Italic"/>
+                    <TextBlock x:Name="fighterAddedInfoText" HorizontalAlignment="Left" Margin="19,153,0,0" VerticalAlignment="Top" Width="317" Height="23" FontSize="16" FontWeight="Light" FontStyle="Italic" Foreground="Blue"/>
                     <Rectangle HorizontalAlignment="Left" Height="34" Margin="19,185,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
                     <Label Content="Add fight outcome" HorizontalAlignment="Left" Margin="19,185,0,0" VerticalAlignment="Top" Height="34" Width="278" FontWeight="Bold" VerticalContentAlignment="Center" FontSize="18"/>
                     <Button x:Name="submitFightButton" HorizontalAlignment="Left" Margin="302,185,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,-0.071" Height="34" Width="34" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Foreground="{x:Null}">
@@ -271,9 +271,9 @@
                     <Label Content="Loser:" HorizontalAlignment="Left" Margin="19,287,0,0" VerticalAlignment="Top" Width="280" Height="30" Background="{x:Null}" FontWeight="DemiBold" FontStyle="Italic" FontSize="18" Foreground="Red"/>
                     <TextBox x:Name="winnerTextInput" HorizontalAlignment="Left" Margin="19,247,0,0" VerticalAlignment="Top" Width="278" Height="45" FontWeight="Normal" Background="{x:Null}" BorderBrush="Black" SelectionTextBrush="{x:Null}" VerticalContentAlignment="Center" TextChanged="fightInput_TextChanged"/>
                     <TextBox x:Name="loserTextInput" HorizontalAlignment="Left" Margin="21,317,0,0" VerticalAlignment="Top" Width="278" Height="45" FontWeight="Normal" Background="{x:Null}" BorderBrush="Black" SelectionTextBrush="{x:Null}" VerticalContentAlignment="Center" TextChanged="fightInput_TextChanged"/>
-                    <Label x:Name="winnerTextOverlay" Content="Winning fighter name..." HorizontalAlignment="Left" Margin="19,242,0,0" VerticalAlignment="Top" Height="45" Width="278" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="#FF6D6D6D" FontWeight="Normal" FontStyle="Italic" IsEnabled="False" Panel.ZIndex="-1"/>
+                    <Label x:Name="winnerTextOverlay" Content="Winning fighter name..." HorizontalAlignment="Left" Margin="19,247,0,0" VerticalAlignment="Top" Height="45" Width="278" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="#FF6D6D6D" FontWeight="Normal" FontStyle="Italic" IsEnabled="False" Panel.ZIndex="-1"/>
                     <Label x:Name="loserTextOverlay" Content="Losing fighter name..." HorizontalAlignment="Left" Margin="21,317,0,0" VerticalAlignment="Top" Height="45" Width="276" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="#FF6D6D6D" FontWeight="Normal" FontStyle="Italic" IsEnabled="False" Panel.ZIndex="-1"/>
-                    <TextBlock x:Name="newFightOutputLabel" HorizontalAlignment="Left" Margin="19,362,0,0" VerticalAlignment="Top" Width="317" Height="23" FontSize="16" FontWeight="Light" FontStyle="Italic"/>
+                    <TextBlock x:Name="newFightOutputLabel" HorizontalAlignment="Left" Margin="19,362,0,0" VerticalAlignment="Top" Width="317" Height="23" FontSize="16" FontWeight="Light" FontStyle="Italic" Foreground="Blue"/>
                 </Grid>
             </TabItem>
 

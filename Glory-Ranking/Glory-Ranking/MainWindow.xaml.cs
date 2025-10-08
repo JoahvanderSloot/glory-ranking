@@ -196,7 +196,7 @@ namespace Glory_Ranking
                     {
                         if (newFighterName.Text != "ExistingFighter")
                         {
-                            fighterAddedInfoText.Foreground = Brushes.Lime;
+                            fighterAddedInfoText.Foreground = Brushes.Blue;
                             figterAddedInfo.Text = "New fighter added: " + newFighterName.Text;
                             testName = newFighterName.Text;
                             testWeight = weightClasses[i];
@@ -207,7 +207,7 @@ namespace Glory_Ranking
                         }
                         else
                         {
-                            fighterAddedInfoText.Foreground = Brushes.Red;
+                            fighterAddedInfoText.Foreground = Brushes.Orange;
                             figterAddedInfo.Text = "Fighter " + newFighterName.Text + "already exists";
                         }
                     }
@@ -215,6 +215,7 @@ namespace Glory_Ranking
             }
             else if (_button.Name == "submitFightButton")
             {
+                newFightOutput.Foreground = Brushes.Blue;
                 newFightOutput.Text = "Fight added " + winner.Text + " defeated " + loser.Text;
                 addFight.IsEnabled = false;
                 winner.Text = "";
@@ -289,6 +290,7 @@ namespace Glory_Ranking
             {
                 if (loser.Text == winner.Text)
                 {
+                    newFightOutput.Foreground = Brushes.Orange;
                     newFightOutput.Text = "Winner and loser cant be the same fighter";
                     addFight.IsEnabled = false;
                 }
