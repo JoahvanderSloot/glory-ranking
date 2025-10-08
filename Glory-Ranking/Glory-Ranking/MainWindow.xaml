@@ -68,6 +68,9 @@
             </TabItem>
 
             <TabItem Header="Edit Fighter" RenderTransformOrigin="0.5,0.5" BorderBrush="Black">
+                <TabItem.Background>
+                    <ImageBrush/>
+                </TabItem.Background>
                 <TabItem.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -100,28 +103,26 @@
                     <TextBox x:Name="fighterWeightclass" HorizontalAlignment="Left"  Margin="19,124,0,0" TextWrapping="Wrap" Text="Weightclass..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionBrush="#FF7797B1" SelectionTextBrush="{x:Null}" Grid.Row="1"/>
                     <TextBox x:Name="fighterElo" HorizontalAlignment="Left"  Margin="19,184,0,0" TextWrapping="Wrap" Text="Ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionTextBrush="{x:Null}" SelectionBrush="#FF7797B1" Grid.Row="1"/>
                     <TextBox x:Name="fighterPeakElo" HorizontalAlignment="Left"  Margin="19,244,0,0" TextWrapping="Wrap" Text="Peak ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionBrush="#FF7797B1" SelectionTextBrush="{x:Null}" Grid.Row="1"/>
-                    <Button x:Name="editNameButton" Content=""
+                    <Button x:Name="editNameButton"
         HorizontalAlignment="Left"
         Margin="302,66,0,0"
         VerticalAlignment="Top"
         Height="36"
         Width="35"
-        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Grid.Row="1">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/Assets/EditButtonSprite.png" />
-                        </Button.Background>
+        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Grid.Row="1" Background="{x:Null}">
                         <Button.RenderTransform>
                             <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1" />
                         </Button.RenderTransform>
                         <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                        <Image x:Name="editNameButtonIMG" Height="30" Width="30" Source="/Assets/EditButtonSprite.png"/>
                     </Button>
-                    <Button x:Name="setNameButton" Content=""
+                    <Button x:Name="setNameButton"
                         HorizontalAlignment="Left"
                         Margin="302,66,0,0"
                         VerticalAlignment="Top"
                         Height="36"
                         Width="35"
-                        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Background="#FF7BFF00" Grid.Row="1">
+                        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Background="{x:Null}" Grid.Row="1">
 
                         <Button.RenderTransform>
                             <ScaleTransform x:Name="scaleTransform1" ScaleX="1" ScaleY="1" />
@@ -156,14 +157,28 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
+                        <Image x:Name="setNameButtonIMG" Height="30" Width="30" Source="/Assets/DoneButtonSprite.png"/>
                     </Button>
-                    <Button x:Name="setWeightButton" Content=""
+                    <Button x:Name="editWeightButton"
                         HorizontalAlignment="Left"
-                        Margin="302,126,0,0"
+                        Margin="303,126,0,0"
+                        VerticalAlignment="Top"
+                        Height="36"
+                        Width="34"
+                        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Grid.Row="1" Background="{x:Null}">
+                        <Button.RenderTransform>
+                            <ScaleTransform x:Name="scaleTransform3" ScaleX="1" ScaleY="1" />
+                        </Button.RenderTransform>
+                        <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                        <Image x:Name="editWeightButtonIMG" Height="30" Width="30" Source="/Assets/EditButtonSprite.png"/>
+                    </Button>
+                    <Button x:Name="setWeightButton"
+                        HorizontalAlignment="Left"
+                        Margin="303,126,0,0"
                         VerticalAlignment="Top"
                         Height="36"
                         Width="35"
-                        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Background="#FF7BFF00" Grid.Row="1">
+                        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Background="{x:Null}" Grid.Row="1">
 
                         <Button.RenderTransform>
                             <ScaleTransform x:Name="scaleTransform2" ScaleX="1" ScaleY="1" />
@@ -198,21 +213,7 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-                    </Button>
-                    <Button x:Name="editWeightButton" Content=""
-                        HorizontalAlignment="Left"
-                        Margin="303,126,0,0"
-                        VerticalAlignment="Top"
-                        Height="36"
-                        Width="34"
-                        BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click" Grid.Row="1">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/Assets/EditButtonSprite.png" />
-                        </Button.Background>
-                        <Button.RenderTransform>
-                            <ScaleTransform x:Name="scaleTransform3" ScaleX="1" ScaleY="1" />
-                        </Button.RenderTransform>
-                        <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                        <Image x:Name="setWeightButtonIMG" Height="30" Width="30" Source="/Assets/DoneButtonSprite.png"/>
                     </Button>
                     <CheckBox x:Name="checkRetiredOrNot" Content="Active" HorizontalAlignment="Left" Margin="19,38,0,0" VerticalAlignment="Top" Height="21" Background="{x:Null}" BorderBrush="Black" FontWeight="DemiBold" FontSize="15" IsChecked="False" Grid.Row="1" IsEnabled="False" Foreground="Silver"/>
                 </Grid>

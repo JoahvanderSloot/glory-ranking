@@ -25,9 +25,13 @@ namespace Glory_Ranking
         Label searchPrev;
         CheckBox active;
         Button editName;
+        Image editNameIMG;
         Button setName;
+        Image setNameIMG;
         Button editWeight;
+        Image editWeightIMG;
         Button setWeight;
+        Image setWeightIMG;
         List<TextBox> searchInfo = new List<TextBox>();
         //Add Fighter UI elements
         Expander newFighterWeightclass;
@@ -60,13 +64,13 @@ namespace Glory_Ranking
 
             //Assign edit fighter elements
             editName = editNameButton;
-            editName.Visibility = Visibility.Hidden;
+            editNameIMG = editNameButtonIMG;
             setName = setNameButton;
-            setName.Visibility = Visibility.Hidden;
+            setNameIMG = setNameButtonIMG;
             editWeight = editWeightButton;
-            editWeight.Visibility = Visibility.Hidden;
+            editWeightIMG = editWeightButtonIMG;
             setWeight = setWeightButton;
-            setWeight.Visibility = Visibility.Hidden;
+            setWeightIMG = setWeightButtonIMG;
 
             //Assign search info elements
             searchInfo.AddRange(new[] { fighterName, fighterWeightclass, fighterElo, fighterPeakElo });
@@ -132,6 +136,11 @@ namespace Glory_Ranking
                 searchInfo[2].Text = "Ranking...";
                 searchInfo[3].Text = "Peak ranking...";
             }
+
+            editWeightIMG.Visibility = editWeight.Visibility;
+            editNameIMG.Visibility = editName.Visibility;
+            setNameIMG.Visibility = setName.Visibility;
+            setWeightIMG.Visibility = setWeight.Visibility;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -173,6 +182,11 @@ namespace Glory_Ranking
                     }
                 }
             }
+
+            editWeightIMG.Visibility = editName.Visibility;
+            editNameIMG.Visibility = editWeight.Visibility;
+            setNameIMG.Visibility = setName.Visibility;
+            setWeightIMG.Visibility = setWeight.Visibility;
 
             if (_button.Name == "submitNewFighterButton")
             {
@@ -312,8 +326,12 @@ namespace Glory_Ranking
             searchFighter.Text = "";
             editName.Visibility = Visibility.Hidden;
             editWeight.Visibility = Visibility.Hidden;
+            editWeightIMG.Visibility = editWeight.Visibility;
+            editNameIMG.Visibility = editName.Visibility;
             setName.Visibility = Visibility.Hidden;
             setWeight.Visibility = Visibility.Hidden;
+            setNameIMG.Visibility = setName.Visibility;
+            setWeightIMG.Visibility = setWeight.Visibility;
             active.IsEnabled = false;
             active.Foreground = Brushes.Silver;
             active.IsChecked = false;
