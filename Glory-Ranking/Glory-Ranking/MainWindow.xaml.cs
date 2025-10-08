@@ -45,7 +45,7 @@ namespace Glory_Ranking
         TextBox loser;
         Label winnerOverlay;
         Label loserOverlay;
-        Label newFightOutput;
+        TextBlock newFightOutput;
         Button addFight;
 
         public MainWindow()
@@ -215,7 +215,7 @@ namespace Glory_Ranking
             }
             else if (_button.Name == "submitFightButton")
             {
-                newFightOutput.Content = "Fight added " + winner.Text + " defeated " + loser.Text;
+                newFightOutput.Text = "Fight added " + winner.Text + " defeated " + loser.Text;
                 addFight.IsEnabled = false;
                 winner.Text = "";
                 loser.Text = "";
@@ -289,12 +289,12 @@ namespace Glory_Ranking
             {
                 if (loser.Text == winner.Text)
                 {
-                    newFightOutput.Content = "Winner and loser cant be the same fighter";
+                    newFightOutput.Text = "Winner and loser cant be the same fighter";
                     addFight.IsEnabled = false;
                 }
                 else
                 {
-                    newFightOutput.Content = "";
+                    newFightOutput.Text = "";
                     addFight.IsEnabled = true;
                 }
             }
@@ -319,7 +319,7 @@ namespace Glory_Ranking
             }
             winner.Text = "";
             loser.Text = "";
-            newFightOutput.Content = null;
+            newFightOutput.Text = null;
 
 
             //Reset search page

@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\AddButtonSprite.png" />
     <None Remove="Assets\DoneButtonSprite.png" />
     <None Remove="Assets\EditButtonSprite.png" />
     <None Remove="EditButtonSprite.png" />
@@ -17,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\AddButtonSprite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\DoneButtonSprite.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
