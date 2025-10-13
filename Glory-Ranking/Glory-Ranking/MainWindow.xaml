@@ -100,7 +100,7 @@
                     <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,184,0,0" Stroke="Black" VerticalAlignment="Top" Width="278" Grid.Row="1"/>
                     <Rectangle HorizontalAlignment="Left" Height="40" Margin="19,244,0,0" Stroke="Black" VerticalAlignment="Top" Width="278" Grid.Row="1"/>
                     <TextBox x:Name="fighterName" HorizontalAlignment="Left"  Margin="19,64,0,0" Text="Name..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" ScrollViewer.VerticalScrollBarVisibility="Hidden" IsEnabled="False" Background="{x:Null}" BorderBrush="Black" SelectionBrush="#FF7797B1" SelectionTextBrush="{x:Null}" Grid.Row="1"/>
-                    <TextBox x:Name="fighterWeightclass" HorizontalAlignment="Left"  Margin="19,124,0,0" TextWrapping="Wrap" Text="Weightclass..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionBrush="#FF7797B1" SelectionTextBrush="{x:Null}" Grid.Row="1"/>
+                    <TextBox x:Name="fighterWeightclass" HorizontalAlignment="Left"  Margin="19,124,0,0" TextWrapping="Wrap" Text="Weightclass..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionBrush="#FF7797B1" SelectionTextBrush="{x:Null}" Grid.Row="1" TextChanged="fighterWeightclass_TextChanged"/>
                     <TextBox x:Name="fighterElo" HorizontalAlignment="Left"  Margin="19,184,0,0" TextWrapping="Wrap" Text="Ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionTextBrush="{x:Null}" SelectionBrush="#FF7797B1" Grid.Row="1"/>
                     <TextBox x:Name="fighterPeakElo" HorizontalAlignment="Left"  Margin="19,244,0,0" TextWrapping="Wrap" Text="Peak ranking..." VerticalAlignment="Top" Height="40" Width="278" FontWeight="DemiBold" Foreground="Silver" Padding="6,5,0,0" IsEnabled="False" BorderBrush="Black" Background="{x:Null}" SelectionBrush="#FF7797B1" SelectionTextBrush="{x:Null}" Grid.Row="1"/>
                     <Button x:Name="editNameButton"
@@ -286,7 +286,13 @@
                         <TranslateTransform Y="160"/>
                     </TransformGroup>
                 </TabItem.RenderTransform>
-                <Grid Background="White"/>
+                <Grid Background="White">
+                    <Button x:Name="downloadJsonButton" Content="Download JSON" HorizontalAlignment="Left" Margin="19,128,0,0" VerticalAlignment="Top" Height="59" Width="278" BorderBrush="Black" Click="Button_Click"/>
+                    <Button x:Name="uploadJsonButton" Content="Upload JSON" HorizontalAlignment="Left" Margin="19,228,0,0" VerticalAlignment="Top" Height="59" Width="278" BorderBrush="Black" Click="Button_Click"/>
+                    <Button x:Name="resetJsonButton" Content="Reset JSON" HorizontalAlignment="Left" Margin="19,328,0,0" VerticalAlignment="Top" Height="59" Width="278" Foreground="Red" BorderBrush="Black" Click="Button_Click"/>
+                    <Rectangle HorizontalAlignment="Left" Height="59" Margin="19,38,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
+                    <Label Content="Advanced options" HorizontalAlignment="Left" Margin="19,41,0,0" VerticalAlignment="Top" Height="56" Width="278" FontWeight="DemiBold" VerticalContentAlignment="Center" FontSize="25" HorizontalContentAlignment="Center"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

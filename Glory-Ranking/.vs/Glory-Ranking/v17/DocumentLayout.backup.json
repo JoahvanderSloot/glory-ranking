@@ -9,6 +9,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\documents\\wpf\\gloryranking\\glory-ranking\\glory-ranking\\glory-ranking\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\documents\\wpf\\gloryranking\\glory-ranking\\glory-ranking\\glory-ranking\\assets\\fighter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\assets\\fighter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\documents\\wpf\\gloryranking\\glory-ranking\\glory-ranking\\glory-ranking\\assets\\fighters.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\assets\\fighters.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,11 +26,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Fighter.cs",
+              "DocumentMoniker": "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Assets\\Fighter.cs",
+              "RelativeDocumentMoniker": "Glory-Ranking\\Assets\\Fighter.cs",
+              "ToolTip": "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Assets\\Fighter.cs",
+              "RelativeToolTip": "Glory-Ranking\\Assets\\Fighter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAMAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T08:44:07.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Fighters.json",
+              "DocumentMoniker": "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Assets\\Fighters.json",
+              "RelativeDocumentMoniker": "Glory-Ranking\\Assets\\Fighters.json",
+              "ToolTip": "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Assets\\Fighters.json",
+              "RelativeToolTip": "Glory-Ranking\\Assets\\Fighters.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-13T08:33:49.289Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -44,7 +78,7 @@
               "RelativeDocumentMoniker": "Glory-Ranking\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\joahv\\Documents\\WPF\\GloryRanking\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\MainWindow.xaml.cs",
               "RelativeToolTip": "Glory-Ranking\\MainWindow.xaml.cs",
-              "ViewState": "AgIAALMAAAAAAAAAAADgv8QAAABDAAAAAAAAAA==",
+              "ViewState": "AgIAAF4BAAAAAAAAAAAUwH8BAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-06T14:50:39.725Z",
               "EditorCaption": ""

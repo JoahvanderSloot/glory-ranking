@@ -14,7 +14,7 @@ namespace Glory_Ranking
         string testWeight = "Heavyweight";
 
         //BackendData
-        List<string> weightClasses = new List<string>() { "Heavyweight", "Light heavyweight", "Middelweight", "Welterweight", "Featherweight", "None" };
+        List<string> weightClasses = new List<string>() { "None", "Heavyweight", "Light heavyweight", "Middelweight", "Welterweight", "Featherweight"};
 
         //Leaderboard UI elements
         ListBox leaderboard;
@@ -81,7 +81,7 @@ namespace Glory_Ranking
             newFighterTextOverlay = newFighterNameOverlay;
             SubmitNewFighter = submitNewFighterButton;
             figterAddedInfo = fighterAddedInfoText;
-            weightOptions.AddRange(new[] { weightHeavy, weightLightHeavy, weightMiddle, weightWelter, weightFeather, weightNone });
+            weightOptions.AddRange(new[] { weightNone, weightHeavy, weightLightHeavy, weightMiddle, weightWelter, weightFeather });
 
             //Assign add fight elements
             winner = winnerTextInput;
@@ -164,7 +164,6 @@ namespace Glory_Ranking
             {
                 searchInfo[1].IsEnabled = true;
                 editWeight.Visibility = Visibility.Hidden;
-                setWeight.Visibility = Visibility.Visible;
             }
             else if (_button.Name == "setWeightButton")
             {
@@ -220,6 +219,29 @@ namespace Glory_Ranking
                 addFight.IsEnabled = false;
                 winner.Text = "";
                 loser.Text = "";
+            }
+
+
+            if (_button.Name == "downloadJsonButton")
+            {
+
+            }
+            else if (_button.Name == "uploadJsonButton")
+            {
+                Microsoft.Win32.OpenFileDialog _openFileDialog = new Microsoft.Win32.OpenFileDialog();
+
+                bool? _response = _openFileDialog.ShowDialog();
+
+                if (_response == true)
+                {
+                    string _filepath = _openFileDialog.FileName;
+
+                    MessageBox.Show(_filepath);
+                }
+            }
+            else if (_button.Name == "resetJsonButton")
+            {
+
             }
         }
 
