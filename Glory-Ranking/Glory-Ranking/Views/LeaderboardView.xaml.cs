@@ -8,5 +8,10 @@ namespace Glory_Ranking.Views
         {
             InitializeComponent();
         }
+
+        private void leaderboardDivision_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            chooseDivPrev.Visibility = leaderboardDivision.SelectedItem == null ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+        }
     }
 }
