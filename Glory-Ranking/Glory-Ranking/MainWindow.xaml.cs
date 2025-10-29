@@ -14,7 +14,7 @@ namespace Glory_Ranking
         string testWeight = "Heavyweight";
 
         //BackendData
-        List<string> weightClasses = new List<string>() { "None", "Heavyweight", "Light heavyweight", "Middelweight", "Welterweight", "Featherweight"};
+        List<string> weightClasses = new List<string>() { "None", "Heavyweight", "Light heavyweight", "Middelweight", "Welterweight", "Featherweight" };
 
         //Leaderboard UI elements
         ListBox leaderboard;
@@ -363,6 +363,32 @@ namespace Glory_Ranking
             searchInfo[1].Text = "Weightclass...";
             searchInfo[2].Text = "Ranking...";
             searchInfo[3].Text = "Peak ranking...";
+        }
+
+        private void fighterWeightclass_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (editWeight != null)
+            {
+                if (editWeight.Visibility == Visibility.Hidden)
+                {
+                    TextBox _textBox = (TextBox)sender;
+                    if (setWeight != null)
+                    {
+                        foreach (var _weight in weightClasses)
+                        {
+                            if (_textBox.Text == _weight)
+                            {
+                                setWeight.Visibility = Visibility.Visible;
+                                return;
+                            }
+                            else
+                            {
+                                setWeight.Visibility = Visibility.Hidden;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -10,23 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="viwes\**" />
+    <EmbeddedResource Remove="viwes\**" />
+    <None Remove="viwes\**" />
+    <Page Remove="viwes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\AddButtonSprite.png" />
     <None Remove="Assets\DoneButtonSprite.png" />
     <None Remove="Assets\EditButtonSprite.png" />
     <None Remove="EditButtonSprite.png" />
     <None Remove="Schermafbeelding 2025-09-09 105242.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Assets\AddButtonSprite.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\DoneButtonSprite.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\EditButtonSprite.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
 </Project>
