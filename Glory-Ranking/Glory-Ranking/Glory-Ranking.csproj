@@ -8,5 +8,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Sprites\AddButtonSprite.png" />
+    <None Remove="Assets\Sprites\DoneButtonSprite.png" />
+    <None Remove="Assets\Sprites\EditButtonSprite.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Sprites\AddButtonSprite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Sprites\DoneButtonSprite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Sprites\EditButtonSprite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
 	
 </Project>

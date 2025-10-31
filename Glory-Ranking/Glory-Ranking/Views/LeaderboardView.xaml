@@ -3,13 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
 
-    <Grid Background="White">
-        <ListBox x:Name="leaderboardBox" av:ItemsSource="{av:SampleData ItemCount=10}" Margin="20,85,20,10" BorderBrush="Black" FontWeight="Normal" FontSize="20"/>
-        <ComboBox x:Name="leaderboardDivision" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="277" BorderBrush="Black" RenderTransformOrigin="0.5,0.5" Text="Division" Foreground="Black" SelectionChanged="leaderboardDivision_SelectionChanged">
+    <Grid Margin="20">
+
+        <!-- Division ComboBox -->
+        <ComboBox x:Name="leaderboardDivision"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Width="360"
+                  Height="35"
+                  FontSize="16"
+                  FontWeight="SemiBold"
+                  Foreground="Black"
+                  BorderBrush="Black"
+                  SelectionChanged="leaderboardDivision_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
@@ -18,26 +28,97 @@
             </ComboBox.Background>
             <ComboBoxItem FontWeight="Normal">Heavyweight</ComboBoxItem>
             <ComboBoxItem FontWeight="Normal">Light heavyweight</ComboBoxItem>
-            <ComboBoxItem FontWeight="Normal">Middelweight</ComboBoxItem>
+            <ComboBoxItem FontWeight="Normal">Middleweight</ComboBoxItem>
             <ComboBoxItem FontWeight="Normal">Welterweight</ComboBoxItem>
             <ComboBoxItem FontWeight="Normal">Featherweight</ComboBoxItem>
             <ComboBoxItem FontWeight="Normal">All weightclasses</ComboBoxItem>
         </ComboBox>
-        <TextBox x:Name="chooseDivPrev" Text="Choose Division"
-IsHitTestVisible="False"
-Background="{x:Null}"
-Panel.ZIndex="999"
-Margin="20,38,175,0"
-VerticalAlignment="Top" Height="33" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FF868686" SelectionTextBrush="{x:Null}"/>
-        <CheckBox x:Name="retiredCheckbox" Content="Retired&#xD;&#xA;fighters" HorizontalAlignment="Left" Margin="307,38,0,0" VerticalAlignment="Top" Height="33" Width="81" BorderBrush="Black" FontWeight="Bold" FontSize="13" IsChecked="False" RenderTransformOrigin="0.305,0.63">
+
+        <!-- Placeholder Text -->
+        <TextBox x:Name="chooseDivPrev"
+                 Text="Choose Division"
+                 IsHitTestVisible="False"
+                 Background="{x:Null}"
+                 BorderBrush="{x:Null}"
+                 Foreground="#FF868686"
+                 FontSize="16"
+                 FontWeight="SemiBold"
+                 VerticalAlignment="Top"
+                 Height="35"
+                 Margin="0,0,400,0" VerticalContentAlignment="Center"/>
+
+        <!-- Retired Fighters Toggle -->
+        <CheckBox x:Name="retiredCheckbox"
+                  Content="Retired"
+                  FontSize="14"
+                  FontWeight="SemiBold"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="365,0,0,0"
+                  Height="35"
+                  Width="120"
+                  IsChecked="False" RenderTransformOrigin="0.5,0.5">
             <CheckBox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="1.15" ScaleY="1.15"/>
+                    <ScaleTransform ScaleX="0.75" ScaleY="0.8"/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform X="-1.728" Y="0.644"/>
+                    <TranslateTransform/>
                 </TransformGroup>
             </CheckBox.RenderTransform>
+            <CheckBox.Style>
+                <Style TargetType="CheckBox">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="CheckBox">
+                                <Grid>
+                                    <!-- Outer pill -->
+                                    <Border x:Name="border"
+                                            Width="120"
+                                            Height="35"
+                                            CornerRadius="18"
+                                            Background="#DDD"
+                                            BorderBrush="#AAA"
+                                            BorderThickness="1"/>
+                                    <!-- Knob -->
+                                    <Ellipse x:Name="switchKnob"
+                                             Width="31"
+                                             Height="31"
+                                             Fill="White"
+                                             Margin="2"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"/>
+                                    <!-- Label -->
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsChecked" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#4CAF50"/>
+                                        <Setter TargetName="switchKnob" Property="HorizontalAlignment" Value="Right"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter TargetName="border" Property="Background" Value="#CCC"/>
+                                        <Setter TargetName="switchKnob" Property="Fill" Value="#EEE"/>
+                                        <Setter Property="Foreground" Value="#888"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </CheckBox.Style>
         </CheckBox>
+
+        <!-- Leaderboard List -->
+        <ListBox x:Name="leaderboardBox"
+                 Margin="0,60,0,0"
+                 BorderBrush="Black"
+                 FontWeight="Normal"
+                 FontSize="20"
+                 Background="White"/>
+
     </Grid>
 </UserControl>
