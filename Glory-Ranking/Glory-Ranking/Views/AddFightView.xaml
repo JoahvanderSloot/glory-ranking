@@ -1,55 +1,123 @@
 ﻿<UserControl x:Class="Glory_Ranking.Views.AddFightView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
-        <Expander x:Name="newFighterWeight" HorizontalAlignment="Left" Height="202" Header="Weightclass" Margin="-1,77,0,0" VerticalAlignment="Top" Width="298" BorderBrush="{x:Null}" FontWeight="DemiBold" Background="{x:Null}" Panel.ZIndex="1" RenderTransformOrigin="0.5,0.5" Padding="17, 0, 0, 0">
-            <Expander.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform X="1"/>
-                </TransformGroup>
-            </Expander.RenderTransform>
-            <Grid Background="White">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70*"/>
-                    <ColumnDefinition Width="139*"/>
-                    <ColumnDefinition Width="67*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Background="White" Grid.ColumnSpan="3" Margin="0,0,0,40">
-                    <RadioButton x:Name="weightHeavy" Content="Heavyweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked" IsChecked="False"/>
-                    <RadioButton x:Name="weightLightHeavy" Content="Light heavyweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
-                    <RadioButton x:Name="weightMiddle" Content="Middleweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
-                    <RadioButton x:Name="weightWelter" Content="Welterweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
-                    <RadioButton x:Name="weightFeather" Content="Featherweight" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
-                    <RadioButton x:Name="weightNone" Content="None" Background="{x:Null}" BorderBrush="Black" FontWeight="Light" FontSize="17" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
-                </StackPanel>
-            </Grid>
+             Background="White">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ADD NEW FIGHTER -->
+        <Expander x:Name="AddFighterExpander"
+                  Header="Add New Fighter"
+                  FontWeight="Bold"
+                  BorderBrush="Black"
+                  BorderThickness="1"
+                  Margin="0,0,0,10"
+                  Expanded="AddFighterExpander_Expanded">
+            <StackPanel Margin="10">
+
+                <!-- Fighter Name -->
+                <Grid Margin="0,0,0,8">
+                    <TextBox x:Name="newFighterNameInput"
+                             Height="32"
+                             FontSize="14"
+                             TextChanged="newFighterNameInput_TextChanged"/>
+                    <TextBlock x:Name="newFighterNameOverlay"
+                               Text="New fighter name..."
+                               Foreground="Gray"
+                               Margin="6,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"/>
+                </Grid>
+
+                <!-- Weight Class Dropdown -->
+                <ComboBox x:Name="weightClassDropdown"
+                          Height="32"
+                          Margin="0,0,0,8"
+                          SelectionChanged="WeightClassDropdown_SelectionChanged">
+                    <ComboBoxItem Content="Heavyweight"/>
+                    <ComboBoxItem Content="Light Heavyweight"/>
+                    <ComboBoxItem Content="Middleweight"/>
+                    <ComboBoxItem Content="Welterweight"/>
+                    <ComboBoxItem Content="Featherweight"/>
+                    <ComboBoxItem Content="None"/>
+                </ComboBox>
+
+                <TextBlock x:Name="fighterAddedInfoText"
+                           FontStyle="Italic"
+                           FontSize="14"
+                           Foreground="Blue"
+                           Margin="0,4,0,4"/>
+
+                <Button x:Name="submitNewFighterButton"
+                        Content="Add Fighter"
+                        Height="36"
+                        Width="140"
+                        Click="Button_Click"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        FontWeight="SemiBold"/>
+            </StackPanel>
         </Expander>
-        <Rectangle HorizontalAlignment="Left" Height="34" Margin="19,38,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
-        <Label Content="Add new fighter" HorizontalAlignment="Left" Margin="19,38,0,0" VerticalAlignment="Top" Height="34" Width="278" FontWeight="Bold" VerticalContentAlignment="Center" FontSize="18"/>
-        <TextBox x:Name="newFighterNameInput" HorizontalAlignment="Left" Margin="19,112,0,0" VerticalAlignment="Top" Width="278" Height="41" VerticalContentAlignment="Center" FontWeight="Normal" FontStyle="Italic" BorderBrush="Black" SelectionTextBrush="{x:Null}" Background="{x:Null}" TextChanged="newFighterNameInput_TextChanged"/>
-        <Label x:Name="newFighterNameOverlay" Content="New fighter name..." HorizontalAlignment="Left" Margin="19,112,0,0" VerticalAlignment="Top" Width="278" FontWeight="Normal" FontStyle="Italic" IsEnabled="False" Panel.ZIndex="-1" VerticalContentAlignment="Center" Background="{x:Null}" Cursor=""/>
-        <Button x:Name="submitNewFighterButton" HorizontalAlignment="Left" Margin="302,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,-0.071" Height="34" Width="34" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Foreground="{x:Null}">
-            <Image Height="30" Width="30" Source="/Assets/AddButtonSprite.png"/>
-        </Button>
-        <TextBlock x:Name="fighterAddedInfoText" HorizontalAlignment="Left" Margin="19,153,0,0" VerticalAlignment="Top" Width="317" Height="23" FontSize="16" FontWeight="Light" FontStyle="Italic" Foreground="Blue"/>
-        <Rectangle HorizontalAlignment="Left" Height="34" Margin="19,185,0,0" Stroke="Black" VerticalAlignment="Top" Width="278"/>
-        <Label Content="Add fight outcome" HorizontalAlignment="Left" Margin="19,185,0,0" VerticalAlignment="Top" Height="34" Width="278" FontWeight="Bold" VerticalContentAlignment="Center" FontSize="18"/>
-        <Button x:Name="submitFightButton" HorizontalAlignment="Left" Margin="302,185,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,-0.071" Height="34" Width="34" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Foreground="{x:Null}">
-            <Image Height="30" Width="30" Source="/Assets/AddButtonSprite.png"/>
-        </Button>
-        <Label Content="Winner:" HorizontalAlignment="Left" Margin="19,217,0,0" VerticalAlignment="Top" Width="280" Height="30" Background="{x:Null}" Foreground="Lime" FontWeight="DemiBold" FontStyle="Italic" FontSize="18"/>
-        <Label Content="Loser:" HorizontalAlignment="Left" Margin="19,287,0,0" VerticalAlignment="Top" Width="280" Height="30" Background="{x:Null}" FontWeight="DemiBold" FontStyle="Italic" FontSize="18" Foreground="Red"/>
-        <TextBox x:Name="winnerTextInput" HorizontalAlignment="Left" Margin="19,247,0,0" VerticalAlignment="Top" Width="278" Height="45" FontWeight="Normal" Background="{x:Null}" BorderBrush="Black" SelectionTextBrush="{x:Null}" VerticalContentAlignment="Center" TextChanged="fightInput_TextChanged"/>
-        <TextBox x:Name="loserTextInput" HorizontalAlignment="Left" Margin="21,317,0,0" VerticalAlignment="Top" Width="278" Height="45" FontWeight="Normal" Background="{x:Null}" BorderBrush="Black" SelectionTextBrush="{x:Null}" VerticalContentAlignment="Center" TextChanged="fightInput_TextChanged"/>
-        <Label x:Name="winnerTextOverlay" Content="Winning fighter name..." HorizontalAlignment="Left" Margin="19,247,0,0" VerticalAlignment="Top" Height="45" Width="278" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="#FF6D6D6D" FontWeight="Normal" FontStyle="Italic" IsEnabled="False" Panel.ZIndex="-1"/>
-        <Label x:Name="loserTextOverlay" Content="Losing fighter name..." HorizontalAlignment="Left" Margin="21,317,0,0" VerticalAlignment="Top" Height="45" Width="276" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="#FF6D6D6D" FontWeight="Normal" FontStyle="Italic" IsEnabled="False" Panel.ZIndex="-1"/>
-        <TextBlock x:Name="newFightOutputLabel" HorizontalAlignment="Left" Margin="19,362,0,0" VerticalAlignment="Top" Width="317" Height="23" FontSize="16" FontWeight="Light" FontStyle="Italic" Foreground="Blue"/>
+
+        <!-- ADD FIGHT OUTCOME -->
+        <Expander x:Name="AddFightExpander"
+                  Header="Add Fight Outcome"
+                  FontWeight="Bold"
+                  BorderBrush="Black"
+                  BorderThickness="1"
+                  Grid.Row="1"
+                  Expanded="AddFightExpander_Expanded">
+            <StackPanel Margin="10">
+
+                <!-- Winner -->
+                <Grid Margin="0,0,0,8">
+                    <TextBox x:Name="winnerTextInput"
+                             Height="32"
+                             FontSize="14"
+                             TextChanged="fightInput_TextChanged"/>
+                    <TextBlock x:Name="winnerTextOverlay"
+                               Text="Winner..."
+                               Foreground="Gray"
+                               Margin="6,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"/>
+                </Grid>
+
+                <!-- Loser -->
+                <Grid Margin="0,0,0,8">
+                    <TextBox x:Name="loserTextInput"
+                             Height="32"
+                             FontSize="14"
+                             TextChanged="fightInput_TextChanged"/>
+                    <TextBlock x:Name="loserTextOverlay"
+                               Text="Loser..."
+                               Foreground="Gray"
+                               Margin="6,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"/>
+                </Grid>
+
+                <TextBlock x:Name="newFightOutputLabel"
+                           FontStyle="Italic"
+                           FontSize="14"
+                           Foreground="Blue"
+                           Margin="0,4,0,4"/>
+
+                <Button x:Name="submitFightButton"
+                        Content="Add Fight"
+                        Height="36"
+                        Width="140"
+                        Click="Button_Click"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        FontWeight="SemiBold"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </UserControl>

@@ -1,146 +1,115 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Glory_Ranking.Views
 {
     public partial class AddFightView : UserControl
     {
-        string testName = "Joah";
-        string testWeight = "Heavyweight";
-
-        List<string> weightClasses = new List<string>() { "None", "Heavyweight", "Light heavyweight", "Middelweight", "Welterweight", "Featherweight" };
-        List<RadioButton> weightOptions;
-
         public Action ResetView;
 
         public AddFightView()
         {
             InitializeComponent();
-            weightOptions = new List<RadioButton>() { weightNone, weightHeavy, weightLightHeavy, weightMiddle, weightWelter, weightFeather };
-
-            ResetView = () =>
-            {
-                newFighterWeight.IsExpanded = false;
-                newFighterWeight.Header = "Weightclass";
-                newFighterNameInput.Text = "";
-                newFighterNameOverlay.Visibility = Visibility.Visible;
-                fighterAddedInfoText.Text = "";
-                foreach (var weight in weightOptions)
-                    weight.IsChecked = false;
-
-                winnerTextInput.Text = "";
-                loserTextInput.Text = "";
-                winnerTextOverlay.Visibility = Visibility.Visible;
-                loserTextOverlay.Visibility = Visibility.Visible;
-                newFightOutputLabel.Text = "";
-                submitFightButton.IsEnabled = false;
-                submitNewFighterButton.IsEnabled = false;
-            };
+            ResetView = () => { };
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Button _button = (Button)sender;
-
-            if (_button.Name == "submitNewFighterButton")
-            {
-                for (int i = 0; i < weightOptions.Count; i++)
-                {
-                    if (weightOptions[i].IsChecked == true && newFighterNameInput.Text != "")
-                    {
-                        if (newFighterNameInput.Text != "ExistingFighter")
-                        {
-                            fighterAddedInfoText.Foreground = Brushes.Blue;
-                            fighterAddedInfoText.Text = "New fighter added: " + newFighterNameInput.Text;
-                            testName = newFighterNameInput.Text;
-                            testWeight = weightClasses[i];
-                            weightOptions[i].IsChecked = false;
-                            newFighterWeight.Header = "Weightclass";
-                            newFighterNameInput.Text = "";
-                            newFighterNameOverlay.Visibility = Visibility.Visible;
-                        }
-                        else
-                        {
-                            fighterAddedInfoText.Foreground = Brushes.Orange;
-                            fighterAddedInfoText.Text = "Fighter " + newFighterNameInput.Text + " already exists";
-                        }
-                    }
-                }
-            }
-            else if (_button.Name == "submitFightButton")
-            {
-                newFightOutputLabel.Foreground = Brushes.Blue;
-                newFightOutputLabel.Text = "Fight added " + winnerTextInput.Text + " defeated " + loserTextInput.Text;
-                submitFightButton.IsEnabled = false;
-                winnerTextInput.Text = "";
-                loserTextInput.Text = "";
-            }
-        }
-
+        // Called when any weight class RadioButton is selected
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            RadioButton _button = (RadioButton)sender;
-            foreach (var weight in weightOptions)
+            if (sender is RadioButton rb)
             {
-                if (_button == weight)
-                {
-                    newFighterWeight.Header = weight.Content;
-                    newFighterWeight.IsExpanded = false;
-                    if (!string.IsNullOrEmpty(newFighterNameInput.Text))
-                        submitNewFighterButton.IsEnabled = true;
-                }
+                // Optional: you can handle logic here like setting a selected weight variable
+                // string selectedWeight = rb.Content.ToString();
             }
         }
 
+        // Handles both "Add fighter" and "Add fight" button clicks
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender == submitNewFighterButton)
+            {
+                var fighterName = newFighterNameInput.Text.Trim();
+                if (string.IsNullOrWhiteSpace(fighterName))
+                {
+                    fighterAddedInfoText.Text = "Please enter a fighter name.";
+                    fighterAddedInfoText.Foreground = System.Windows.Media.Brushes.Red;
+                    return;
+                }
+
+                fighterAddedInfoText.Text = $"{fighterName} added successfully!";
+                fighterAddedInfoText.Foreground = System.Windows.Media.Brushes.Blue;
+
+                newFighterNameInput.Clear();
+                newFighterNameOverlay.Visibility = Visibility.Visible;
+            }
+            else if (sender == submitFightButton)
+            {
+                var winner = winnerTextInput.Text.Trim();
+                var loser = loserTextInput.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(winner) || string.IsNullOrWhiteSpace(loser))
+                {
+                    newFightOutputLabel.Text = "Both winner and loser names are required.";
+                    newFightOutputLabel.Foreground = System.Windows.Media.Brushes.Red;
+                    return;
+                }
+
+                if (winner == loser)
+                {
+                    newFightOutputLabel.Text = "Winner and loser cannot be the same.";
+                    newFightOutputLabel.Foreground = System.Windows.Media.Brushes.Red;
+                    return;
+                }
+
+                newFightOutputLabel.Text = $"Fight recorded: {winner} defeated {loser}.";
+                newFightOutputLabel.Foreground = System.Windows.Media.Brushes.Blue;
+
+                winnerTextInput.Clear();
+                loserTextInput.Clear();
+                winnerTextOverlay.Visibility = Visibility.Visible;
+                loserTextOverlay.Visibility = Visibility.Visible;
+            }
+        }
+
+        // Overlay control for fighter name input
         private void newFighterNameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(newFighterNameInput.Text))
+            newFighterNameOverlay.Visibility = string.IsNullOrWhiteSpace(newFighterNameInput.Text)
+                ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        // Overlay control for fight input boxes
+        private void fightInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender == winnerTextInput)
             {
-                newFighterNameOverlay.Visibility = Visibility.Visible;
-                submitNewFighterButton.IsEnabled = false;
+                winnerTextOverlay.Visibility = string.IsNullOrWhiteSpace(winnerTextInput.Text)
+                    ? Visibility.Visible : Visibility.Collapsed;
             }
-            else
+            else if (sender == loserTextInput)
             {
-                newFighterNameOverlay.Visibility = Visibility.Hidden;
-                foreach (var weight in weightOptions)
-                {
-                    if (weight.IsChecked == true)
-                        submitNewFighterButton.IsEnabled = true;
-                }
+                loserTextOverlay.Visibility = string.IsNullOrWhiteSpace(loserTextInput.Text)
+                    ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
-        private void fightInput_TextChanged(object sender, TextChangedEventArgs e)
+        private void AddFighterExpander_Expanded(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(winnerTextInput.Text))
-                winnerTextOverlay.Visibility = Visibility.Hidden;
-            else
-                winnerTextOverlay.Visibility = Visibility.Visible;
+            AddFightExpander.IsExpanded = false;
+        }
 
-            if (!string.IsNullOrEmpty(loserTextInput.Text))
-                loserTextOverlay.Visibility = Visibility.Hidden;
-            else
-                loserTextOverlay.Visibility = Visibility.Visible;
+        private void AddFightExpander_Expanded(object sender, RoutedEventArgs e)
+        {
+            AddFighterExpander.IsExpanded = false;
+        }
 
-            if (!string.IsNullOrEmpty(winnerTextInput.Text) && !string.IsNullOrEmpty(loserTextInput.Text))
+        private void WeightClassDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (weightClassDropdown.SelectedItem is ComboBoxItem selected)
             {
-                if (winnerTextInput.Text == loserTextInput.Text)
-                {
-                    newFightOutputLabel.Foreground = Brushes.Orange;
-                    newFightOutputLabel.Text = "Winner and loser can't be the same fighter";
-                    submitFightButton.IsEnabled = false;
-                }
-                else
-                {
-                    newFightOutputLabel.Text = "";
-                    submitFightButton.IsEnabled = true;
-                }
-            }
-            else
-            {
-                submitFightButton.IsEnabled = false;
+                string selectedWeight = selected.Content.ToString();
+                // You can store this value or use it as needed
+                Console.WriteLine($"Selected weightclass: {selectedWeight}");
             }
         }
 

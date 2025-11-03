@@ -6,3 +6,10 @@
     public int PeakElo { get; set; } = 1000;
 
 }
+
+public class FighterData
+{
+    public string Version = "fighter-data-v1";
+
+    public Fighter[] Fighters;
+}
