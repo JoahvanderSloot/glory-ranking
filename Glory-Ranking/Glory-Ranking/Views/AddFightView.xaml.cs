@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Glory_Ranking.Views
@@ -10,20 +11,42 @@ namespace Glory_Ranking.Views
         public AddFightView()
         {
             InitializeComponent();
-            ResetView = () => { };
+
+            // Define ResetView logic (called when switching tabs)
+            ResetView = () =>
+            {
+                // Clear all textboxes
+                newFighterNameInput.Clear();
+                winnerTextInput.Clear();
+                loserTextInput.Clear();
+
+                // Show overlays again
+                newFighterNameOverlay.Visibility = Visibility.Visible;
+                winnerTextOverlay.Visibility = Visibility.Visible;
+                loserTextOverlay.Visibility = Visibility.Visible;
+
+                // Clear labels
+                fighterAddedInfoText.Text = string.Empty;
+                newFightOutputLabel.Text = string.Empty;
+
+                // Reset weight class dropdown
+                weightClassDropdown.SelectedIndex = -1;
+                weightClassPlaceholder.Visibility = Visibility.Visible;
+
+                // Collapse both expanders
+                AddFighterExpander.IsExpanded = false;
+                AddFightExpander.IsExpanded = false;
+            };
         }
 
-        // Called when any weight class RadioButton is selected
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is RadioButton rb)
             {
-                // Optional: you can handle logic here like setting a selected weight variable
-                // string selectedWeight = rb.Content.ToString();
+                // Optional: handle selected weight
             }
         }
 
-        // Handles both "Add fighter" and "Add fight" button clicks
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (sender == submitNewFighterButton)
@@ -36,11 +59,15 @@ namespace Glory_Ranking.Views
                     return;
                 }
 
+                // Fighter added successfully
                 fighterAddedInfoText.Text = $"{fighterName} added successfully!";
                 fighterAddedInfoText.Foreground = System.Windows.Media.Brushes.Blue;
 
+                // ✅ Clear input and reset overlay & weightclass
                 newFighterNameInput.Clear();
                 newFighterNameOverlay.Visibility = Visibility.Visible;
+                weightClassDropdown.SelectedIndex = -1;
+                weightClassPlaceholder.Visibility = Visibility.Visible;
             }
             else if (sender == submitFightButton)
             {
@@ -61,9 +88,11 @@ namespace Glory_Ranking.Views
                     return;
                 }
 
+                // ✅ Fight recorded successfully
                 newFightOutputLabel.Text = $"Fight recorded: {winner} defeated {loser}.";
                 newFightOutputLabel.Foreground = System.Windows.Media.Brushes.Blue;
 
+                // Clear inputs & show overlays again
                 winnerTextInput.Clear();
                 loserTextInput.Clear();
                 winnerTextOverlay.Visibility = Visibility.Visible;
@@ -71,14 +100,12 @@ namespace Glory_Ranking.Views
             }
         }
 
-        // Overlay control for fighter name input
         private void newFighterNameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             newFighterNameOverlay.Visibility = string.IsNullOrWhiteSpace(newFighterNameInput.Text)
                 ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        // Overlay control for fight input boxes
         private void fightInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (sender == winnerTextInput)
@@ -105,13 +132,17 @@ namespace Glory_Ranking.Views
 
         private void WeightClassDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Show or hide placeholder based on selection
             if (weightClassDropdown.SelectedItem is ComboBoxItem selected)
             {
+                weightClassPlaceholder.Visibility = Visibility.Hidden;
                 string selectedWeight = selected.Content.ToString();
-                // You can store this value or use it as needed
                 Console.WriteLine($"Selected weightclass: {selectedWeight}");
             }
+            else
+            {
+                weightClassPlaceholder.Visibility = Visibility.Visible;
+            }
         }
-
     }
 }

@@ -24,7 +24,7 @@
                     <TextBox x:Name="newFighterNameInput"
                              Height="32"
                              FontSize="14"
-                             TextChanged="newFighterNameInput_TextChanged"/>
+                             TextChanged="newFighterNameInput_TextChanged" VerticalContentAlignment="Center"/>
                     <TextBlock x:Name="newFighterNameOverlay"
                                Text="New fighter name..."
                                Foreground="Gray"
@@ -34,17 +34,31 @@
                 </Grid>
 
                 <!-- Weight Class Dropdown -->
-                <ComboBox x:Name="weightClassDropdown"
-                          Height="32"
-                          Margin="0,0,0,8"
-                          SelectionChanged="WeightClassDropdown_SelectionChanged">
-                    <ComboBoxItem Content="Heavyweight"/>
-                    <ComboBoxItem Content="Light Heavyweight"/>
-                    <ComboBoxItem Content="Middleweight"/>
-                    <ComboBoxItem Content="Welterweight"/>
-                    <ComboBoxItem Content="Featherweight"/>
-                    <ComboBoxItem Content="None"/>
-                </ComboBox>
+                <Grid Margin="0,0,0,8">
+                    <!-- The ComboBox itself -->
+                    <ComboBox x:Name="weightClassDropdown"
+              Height="32"
+              SelectionChanged="WeightClassDropdown_SelectionChanged"
+              VerticalContentAlignment="Center"
+              BorderBrush="Black">
+                        <ComboBoxItem Content="Heavyweight"/>
+                        <ComboBoxItem Content="Light Heavyweight"/>
+                        <ComboBoxItem Content="Middleweight"/>
+                        <ComboBoxItem Content="Welterweight"/>
+                        <ComboBoxItem Content="Featherweight"/>
+                        <ComboBoxItem Content="None"/>
+                    </ComboBox>
+
+                    <!-- The placeholder label -->
+                    <Label x:Name="weightClassPlaceholder"
+           Content="Choose division..."
+           Foreground="#888"
+           VerticalAlignment="Center"
+           Margin="0,0,10,0"
+           IsHitTestVisible="False"
+           Panel.ZIndex="1"/>
+                </Grid>
+
 
                 <TextBlock x:Name="fighterAddedInfoText"
                            FontStyle="Italic"
@@ -76,7 +90,7 @@
 
                 <!-- Winner -->
                 <Grid Margin="0,0,0,8">
-                    <TextBox x:Name="winnerTextInput"
+                    <TextBox x:Name="winnerTextInput" VerticalContentAlignment="Center"
                              Height="32"
                              FontSize="14"
                              TextChanged="fightInput_TextChanged"/>
@@ -90,7 +104,7 @@
 
                 <!-- Loser -->
                 <Grid Margin="0,0,0,8">
-                    <TextBox x:Name="loserTextInput"
+                    <TextBox x:Name="loserTextInput" VerticalContentAlignment="Center"
                              Height="32"
                              FontSize="14"
                              TextChanged="fightInput_TextChanged"/>
