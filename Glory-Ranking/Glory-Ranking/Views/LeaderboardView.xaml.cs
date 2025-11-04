@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Glory_Ranking.Views
 {
@@ -18,15 +19,18 @@ namespace Glory_Ranking.Views
             RefreshLeaderboard();
         }
 
-        private void LeaderboardBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void LeaderboardBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (leaderboardBox.SelectedItem == null) return;
 
-            string _selectedText = leaderboardBox.SelectedItem.ToString();
+            string selectedText = leaderboardBox.SelectedItem.ToString();
+            int index = selectedText.IndexOf(" - Elo:");
+            if (index < 0) return;
 
-            string _fighterName = _selectedText.Split(' ')[0];
+            string fighterName = selectedText.Substring(0, index);
 
-            fighterWindow.OpenFighter(_fighterName);
+            var fighterWindow = new FighterWindow();
+            fighterWindow.OpenFighter(fighterName);
             fighterWindow.Show();
         }
 
@@ -89,7 +93,7 @@ namespace Glory_Ranking.Views
 
                 string _display = _division.HasValue
                     ? $"{_f.Name} - Elo: {_f.Elo}"
-                    : $"{_f.Name} ({_weight}) - Elo: {_f.Elo}";
+                    : $"{_f.Name} - Elo: {_f.Elo} ({_weight})";
 
                 leaderboardBox.Items.Add(_display);
             }

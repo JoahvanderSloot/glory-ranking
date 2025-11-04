@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\views\\leaderboardview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\views\\leaderboardview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\fighterwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\fighterwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\views\\leaderboardview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\views\\leaderboardview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\fighterwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\views\\editjsonview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\views\\editjsonview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|solutionrelative:glory-ranking\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2F34636C-7289-4797-BF21-A251A91A2916}|Glory-Ranking\\Glory-Ranking.csproj|c:\\users\\joahv\\onedrive\\documenten\\wpf\\glory-ranking\\glory-ranking\\glory-ranking\\assets\\fighter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -74,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 163,
-          "SelectedChildIndex": 16,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -88,14 +88,14 @@
               "RelativeDocumentMoniker": "Glory-Ranking\\FighterWindow.xaml.cs",
               "ToolTip": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\FighterWindow.xaml.cs",
               "RelativeToolTip": "Glory-Ranking\\FighterWindow.xaml.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAgwDoAAABDAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAswCEAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-04T12:32:44.717Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "FighterWindow.xaml",
               "DocumentMoniker": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\FighterWindow.xaml",
               "RelativeDocumentMoniker": "Glory-Ranking\\FighterWindow.xaml",
@@ -115,8 +115,7 @@
               "RelativeToolTip": "Glory-Ranking\\Scripts\\FighterManager.cs",
               "ViewState": "AgIAAD8AAAAAAAAAAAAUwE8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T10:20:01.552Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T10:20:01.552Z"
             },
             {
               "$type": "Document",
@@ -128,8 +127,7 @@
               "RelativeToolTip": "Glory-Ranking\\Scripts\\FighterStorage.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwBgAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T10:19:21.702Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T10:19:21.702Z"
             },
             {
               "$type": "Document",
@@ -141,8 +139,7 @@
               "RelativeToolTip": "Glory-Ranking\\Glory-Ranking.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-29T14:28:01.001Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T14:28:01.001Z"
             },
             {
               "$type": "Document",
@@ -154,8 +151,7 @@
               "RelativeToolTip": "Glory-Ranking\\Views\\AddFightView.xaml.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAowGAAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T12:20:36.283Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T12:20:36.283Z"
             },
             {
               "$type": "Document",
@@ -171,20 +167,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "LeaderboardView.xaml.cs",
               "DocumentMoniker": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Views\\LeaderboardView.xaml.cs",
               "RelativeDocumentMoniker": "Glory-Ranking\\Views\\LeaderboardView.xaml.cs",
               "ToolTip": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Views\\LeaderboardView.xaml.cs",
               "RelativeToolTip": "Glory-Ranking\\Views\\LeaderboardView.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAwwBQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-29T12:20:19.012Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "EditJsonView.xaml.cs",
               "DocumentMoniker": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Views\\EditJsonView.xaml.cs",
               "RelativeDocumentMoniker": "Glory-Ranking\\Views\\EditJsonView.xaml.cs",
@@ -192,8 +188,7 @@
               "RelativeToolTip": "Glory-Ranking\\Views\\EditJsonView.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T12:20:29.334Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T12:20:29.334Z"
             },
             {
               "$type": "Document",
@@ -237,8 +232,7 @@
               "ToolTip": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\Views\\LeaderboardView.xaml",
               "RelativeToolTip": "Glory-Ranking\\Views\\LeaderboardView.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-29T12:15:50.31Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T12:15:50.31Z"
             },
             {
               "$type": "Document",
@@ -250,12 +244,11 @@
               "RelativeToolTip": "Glory-Ranking\\Assets\\Fighter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T08:44:07.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-13T08:44:07.336Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Glory-Ranking\\MainWindow.xaml",
@@ -267,13 +260,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Glory-Ranking\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\joahv\\OneDrive\\Documenten\\WPF\\glory-ranking\\Glory-Ranking\\Glory-Ranking\\MainWindow.xaml.cs",
               "RelativeToolTip": "Glory-Ranking\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAIwBUAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-06T14:50:39.725Z",
               "EditorCaption": ""

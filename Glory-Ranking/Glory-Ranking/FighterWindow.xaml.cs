@@ -1,23 +1,22 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Glory_Ranking
 {
     public partial class FighterWindow : Window
     {
-        MainWindow mainWindow = new MainWindow();
-
         public FighterWindow()
         {
             InitializeComponent();
         }
 
-        public void OpenFighter(string _name)
+        public void OpenFighter(string _fighterName)
         {
-            var _fighter = FighterManager.GetFighter(_name);
+            var _fighter = FighterManager.GetFighter(_fighterName);
 
             if (_fighter == null)
             {
-                MessageBox.Show($"Fighter '{_name}' not found!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Fighter '{_fighterName}' not found!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -32,14 +31,13 @@ namespace Glory_Ranking
             biggestEloGain.Content = $"Biggest Elo Gain: {_fighter.BiggestEloGain}";
             biggestEloLoss.Content = $"Biggest Elo Loss: {_fighter.BiggestEloLoss}";
 
-            // Show the window
             this.Show();
             this.Activate();
         }
 
-        private string GetWeightClassName(int division)
+        private string GetWeightClassName(int _division)
         {
-            return division switch
+            return _division switch
             {
                 1 => "Heavyweight",
                 2 => "Light heavyweight",
@@ -56,9 +54,20 @@ namespace Glory_Ranking
 
             string _fighterName = name.Content.ToString().Replace("Name: ", "").Trim();
 
-            mainWindow.EditFighterTab.searchBox.Text = _fighterName;
+            if (Application.Current.MainWindow is MainWindow _mainWindow)
+            {
+                if (_mainWindow.mainTabControl != null)
+                {
+                    _mainWindow.mainTabControl.SelectedIndex = 1;
 
-            this.Close();
+                    _mainWindow.Dispatcher.InvokeAsync(() =>
+                    {
+                        _mainWindow.EditFighterTab.searchBox.Text = _fighterName;
+                    });
+                }
+            }
+
+            this.Hide();
         }
     }
 }
