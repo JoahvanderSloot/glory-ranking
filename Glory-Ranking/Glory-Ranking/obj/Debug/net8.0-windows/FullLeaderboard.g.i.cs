@@ -76,7 +76,7 @@ namespace Glory_Ranking {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Glory-Ranking;component/fullleaderboard.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Glory-Ranking;V1.0.0.0;component/fullleaderboard.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\FullLeaderboard.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
