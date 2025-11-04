@@ -4,6 +4,8 @@ namespace Glory_Ranking.Views
 {
     public partial class LeaderboardView : UserControl
     {
+        FighterWindow fighterWindow = new FighterWindow();
+
         public LeaderboardView()
         {
             InitializeComponent();
@@ -11,7 +13,21 @@ namespace Glory_Ranking.Views
             retiredCheckbox.Checked += RetiredCheckbox_Changed;
             retiredCheckbox.Unchecked += RetiredCheckbox_Changed;
 
+            leaderboardBox.MouseDoubleClick += LeaderboardBox_MouseDoubleClick;
+
             RefreshLeaderboard();
+        }
+
+        private void LeaderboardBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (leaderboardBox.SelectedItem == null) return;
+
+            string _selectedText = leaderboardBox.SelectedItem.ToString();
+
+            string _fighterName = _selectedText.Split(' ')[0];
+
+            fighterWindow.OpenFighter(_fighterName);
+            fighterWindow.Show();
         }
 
         private void RetiredCheckbox_Changed(object sender, System.Windows.RoutedEventArgs e)

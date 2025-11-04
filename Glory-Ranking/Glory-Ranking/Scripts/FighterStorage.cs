@@ -7,11 +7,11 @@ namespace Glory_Ranking
     {
         private static string FilePath = "Fighters.json";
 
-        public static void Save(FighterData data)
+        public static void Save(FighterData _data)
         {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string json = JsonSerializer.Serialize(data, options);
-            File.WriteAllText(FilePath, json);
+            var _options = new JsonSerializerOptions { WriteIndented = true };
+            string _json = JsonSerializer.Serialize(_data, _options);
+            File.WriteAllText(FilePath, _json);
         }
 
         public static FighterData Load()
@@ -21,14 +21,14 @@ namespace Glory_Ranking
                 return new FighterData { Fighters = new Fighter[0] };
             }
 
-            string json = File.ReadAllText(FilePath);
-            return JsonSerializer.Deserialize<FighterData>(json) ?? new FighterData { Fighters = new Fighter[0] };
+            string _json = File.ReadAllText(FilePath);
+            return JsonSerializer.Deserialize<FighterData>(_json) ?? new FighterData { Fighters = new Fighter[0] };
         }
 
         public static void Reset()
         {
-            var emptyData = new FighterData { Fighters = new Fighter[0] };
-            Save(emptyData);
+            var _emptyData = new FighterData { Fighters = new Fighter[0] };
+            Save(_emptyData);
         }
     }
 }

@@ -18,14 +18,14 @@ namespace Glory_Ranking
             FighterStorage.Save(new FighterData { Fighters = Fighters.ToArray() });
         }
 
-        public static void AddFighter(string name, int division)
+        public static void AddFighter(string _name, int _division)
         {
-            if (Fighters.Any(f => f.Name.Equals(name, StringComparison.OrdinalIgnoreCase))) return;
+            if (Fighters.Any(f => f.Name.Equals(_name, StringComparison.OrdinalIgnoreCase))) return;
 
             Fighters.Add(new Fighter
             {
-                Name = name,
-                Division = division,
+                Name = _name,
+                Division = _division,
                 Elo = 1000,
                 PeakElo = 1000
             });
@@ -33,44 +33,64 @@ namespace Glory_Ranking
             SaveFighters();
         }
 
-        public static Fighter? GetFighter(string name)
+        public static Fighter? GetFighter(string _name)
         {
-            return Fighters.FirstOrDefault(f => f.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            return Fighters.FirstOrDefault(_f => _f.Name.Equals(_name, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static void UpdateFighter(Fighter fighter)
+        public static void UpdateFighter(Fighter _fighter)
         {
-            fighter.PeakElo = Math.Max(fighter.PeakElo, fighter.Elo);
+            _fighter.PeakElo = Math.Max(_fighter.PeakElo, _fighter.Elo);
             SaveFighters();
         }
 
-        public static void RecordFight(string winnerName, string loserName)
+        public static void RecordFight(string _winnerName, string _loserName)
         {
-            var winner = GetFighter(winnerName);
-            var loser = GetFighter(loserName);
+            var _winner = GetFighter(_winnerName);
+            var _loser = GetFighter(_loserName);
 
-            if (winner == null || loser == null || winner == loser) return;
+            if (_winner == null || _loser == null || _winner == _loser) return;
 
             const int k = 32;
-            double expectedWinner = 1.0 / (1 + Math.Pow(10, (loser.Elo - winner.Elo) / 400.0));
-            double expectedLoser = 1.0 / (1 + Math.Pow(10, (winner.Elo - loser.Elo) / 400.0));
 
-            winner.Elo = (int)(winner.Elo + k * (1 - expectedWinner));
-            loser.Elo = (int)(loser.Elo + k * (0 - expectedLoser));
+            double _expectedWinner = 1.0 / (1 + Math.Pow(10, (_loser.Elo - _winner.Elo) / 400.0));
+            double _expectedLoser = 1.0 / (1 + Math.Pow(10, (_winner.Elo - _loser.Elo) / 400.0));
 
-            winner.PeakElo = Math.Max(winner.PeakElo, winner.Elo);
-            loser.PeakElo = Math.Max(loser.PeakElo, loser.Elo);
+            int _winnerOldElo = _winner.Elo;
+            int _loserOldElo = _loser.Elo;
+
+            // Calculate new Elo
+            _winner.Elo = (int)(_winner.Elo + k * (1 - _expectedWinner));
+            _loser.Elo = (int)(_loser.Elo + k * (0 - _expectedLoser));
+
+            // Update peak Elo
+            _winner.PeakElo = Math.Max(_winner.PeakElo, _winner.Elo);
+            _loser.PeakElo = Math.Max(_loser.PeakElo, _loser.Elo);
+
+            // Update Wins/Losses
+            _winner.Wins++;
+            _loser.Losses++;
+
+            // Update Biggest Elo Gain/Loss
+            int _winnerEloGain = _winner.Elo - _winnerOldElo;
+            int _loserEloLoss = _loserOldElo - _loser.Elo;
+
+            if (_winnerEloGain > _winner.BiggestEloGain)
+                _winner.BiggestEloGain = _winnerEloGain;
+
+            if (_loserEloLoss > _loser.BiggestEloLoss)
+                _loser.BiggestEloLoss = _loserEloLoss;
 
             SaveFighters();
         }
 
-        public static List<Fighter> GetLeaderboard(int? division = null, int top = 10)
+        public static List<Fighter> GetLeaderboard(int? _division = null, int top = 10)
         {
-            var query = Fighters.AsEnumerable();
-            if (division.HasValue)
-                query = query.Where(f => f.Division == division.Value);
+            var _query = Fighters.AsEnumerable();
+            if (_division.HasValue)
+                _query = _query.Where(_f => _f.Division == _division.Value);
 
-            return query.OrderByDescending(f => f.Elo)
+            return _query.OrderByDescending(_f => _f.Elo)
                         .Take(top)
                         .ToList();
         }

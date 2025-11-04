@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\joahv\OneDrive\Documenten\WPF\glory-ranking\Glory-Ranking\Glory-Ranking\App.xaml
-5670614415
+6-679838650
 
-11-1572892779
+12-1536731016
 198-192518753
-MainWindow.xaml;Views\AddFightView.xaml;Views\EditFighterView.xaml;Views\EditJsonView.xaml;Views\LeaderboardView.xaml;
+FighterWindow.xaml;MainWindow.xaml;Views\AddFightView.xaml;Views\EditFighterView.xaml;Views\EditJsonView.xaml;Views\LeaderboardView.xaml;
 
 False
 
