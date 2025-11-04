@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Glory_Ranking
@@ -13,7 +12,6 @@ namespace Glory_Ranking
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Ensure we only respond to the main TabControl, not nested ones
             if (e.Source is TabControl)
             {
                 // Reset AddFightView if it exists
@@ -21,8 +19,6 @@ namespace Glory_Ranking
 
                 // Reset EditFighterView if it exists
                 EditFighterTab?.ResetView?.Invoke();
-
-                // LeaderboardView and EditJsonView do not require reset currently
             }
         }
     }

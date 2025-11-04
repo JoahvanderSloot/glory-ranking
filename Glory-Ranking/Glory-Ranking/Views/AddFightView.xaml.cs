@@ -12,28 +12,22 @@ namespace Glory_Ranking.Views
         {
             InitializeComponent();
 
-            // Define ResetView logic (called when switching tabs)
             ResetView = () =>
             {
-                // Clear all textboxes
                 newFighterNameInput.Clear();
                 winnerTextInput.Clear();
                 loserTextInput.Clear();
 
-                // Show overlays again
                 newFighterNameOverlay.Visibility = Visibility.Visible;
                 winnerTextOverlay.Visibility = Visibility.Visible;
                 loserTextOverlay.Visibility = Visibility.Visible;
 
-                // Clear labels
                 fighterAddedInfoText.Text = string.Empty;
                 newFightOutputLabel.Text = string.Empty;
 
-                // Reset weight class dropdown
                 weightClassDropdown.SelectedIndex = -1;
                 weightClassPlaceholder.Visibility = Visibility.Visible;
 
-                // Collapse both expanders
                 AddFighterExpander.IsExpanded = false;
                 AddFightExpander.IsExpanded = false;
             };
@@ -43,7 +37,7 @@ namespace Glory_Ranking.Views
         {
             if (sender is RadioButton rb)
             {
-                // Optional: handle selected weight
+                //handle selected weight
             }
         }
 
@@ -59,11 +53,9 @@ namespace Glory_Ranking.Views
                     return;
                 }
 
-                // Fighter added successfully
                 fighterAddedInfoText.Text = $"{fighterName} added successfully!";
                 fighterAddedInfoText.Foreground = System.Windows.Media.Brushes.Blue;
 
-                // ✅ Clear input and reset overlay & weightclass
                 newFighterNameInput.Clear();
                 newFighterNameOverlay.Visibility = Visibility.Visible;
                 weightClassDropdown.SelectedIndex = -1;
@@ -88,11 +80,9 @@ namespace Glory_Ranking.Views
                     return;
                 }
 
-                // ✅ Fight recorded successfully
                 newFightOutputLabel.Text = $"Fight recorded: {winner} defeated {loser}.";
                 newFightOutputLabel.Foreground = System.Windows.Media.Brushes.Blue;
 
-                // Clear inputs & show overlays again
                 winnerTextInput.Clear();
                 loserTextInput.Clear();
                 winnerTextOverlay.Visibility = Visibility.Visible;

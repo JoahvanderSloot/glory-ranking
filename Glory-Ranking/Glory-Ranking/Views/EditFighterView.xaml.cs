@@ -46,15 +46,14 @@ namespace Glory_Ranking.Views
                 checkRetiredOrNot.IsChecked = false;
                 checkRetiredOrNot.Foreground = Brushes.Silver;
 
-                foreach (var item in searchInfo)
+                foreach (var _item in searchInfo)
                 {
-                    item.Foreground = Brushes.Silver;
-                    item.IsEnabled = false;
+                    _item.Foreground = Brushes.Silver;
+                    _item.IsEnabled = false;
                 }
             };
         }
 
-        // --- Search logic ---
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtSearchPlaceholder.Visibility =
@@ -74,10 +73,10 @@ namespace Glory_Ranking.Views
                 return;
             }
 
-            foreach (var item in searchInfo)
+            foreach (var _item in searchInfo)
             {
-                item.Foreground = Brushes.Silver;
-                item.IsEnabled = false;
+                _item.Foreground = Brushes.Silver;
+                _item.IsEnabled = false;
             }
 
             fighterName.Text = "Name...";
@@ -92,7 +91,6 @@ namespace Glory_Ranking.Views
             SetEditButtonsVisibility(false);
         }
 
-        // --- Load Fighter Info ---
         private void LoadFighterData()
         {
             fighterName.Text = testName;
@@ -100,23 +98,21 @@ namespace Glory_Ranking.Views
             fighterElo.Text = "1200";
             fighterPeakElo.Text = "1350";
 
-            foreach (var item in searchInfo)
+            foreach (var _item in searchInfo)
             {
-                item.Foreground = Brushes.Black;
-                item.IsEnabled = false;
+                _item.Foreground = Brushes.Black;
+                _item.IsEnabled = false;
             }
 
             checkRetiredOrNot.IsEnabled = true;
             checkRetiredOrNot.Foreground = Brushes.Black;
 
-            // Show/hide edit buttons depending on retirement
             SetEditButtonsVisibility(checkRetiredOrNot.IsChecked == true);
 
             fighterWeightDropdown.Visibility = Visibility.Hidden;
             fighterWeightclass.Visibility = Visibility.Visible;
         }
 
-        // --- Edit Name ---
         private void EditName_Click(object sender, RoutedEventArgs e)
         {
             if (checkRetiredOrNot.IsChecked == false) return;
@@ -137,7 +133,6 @@ namespace Glory_Ranking.Views
             searchBox.TextChanged += searchBox_TextChanged;
         }
 
-        // --- Edit Weight ---
         private void EditWeight_Click(object sender, RoutedEventArgs e)
         {
             if (checkRetiredOrNot.IsChecked == false) return;
@@ -167,7 +162,6 @@ namespace Glory_Ranking.Views
             editWeightButton.Visibility = Visibility.Visible;
         }
 
-        // --- Retirement checkbox changed ---
         private void checkRetiredOrNot_Checked(object sender, RoutedEventArgs e)
         {
             SetEditButtonsVisibility(true);
@@ -175,16 +169,14 @@ namespace Glory_Ranking.Views
 
         private void checkRetiredOrNot_Unchecked(object sender, RoutedEventArgs e)
         {
-            // If currently editing name, save it
             if (fighterName.IsEnabled)
             {
                 testName = fighterName.Text;
-                searchBox.TextChanged -= searchBox_TextChanged; // prevent triggering ResetView
-                searchBox.Text = testName; // update search box
+                searchBox.TextChanged -= searchBox_TextChanged;
+                searchBox.Text = testName;
                 searchBox.TextChanged += searchBox_TextChanged;
             }
 
-            // If currently editing weight, save it
             if (fighterWeightDropdown.Visibility == Visibility.Visible)
             {
                 if (fighterWeightDropdown.SelectedItem != null)
@@ -197,11 +189,9 @@ namespace Glory_Ranking.Views
                 testWeight = fighterWeightclass.Text;
             }
 
-            // Commit edits and hide buttons
             CommitEdit(fighterName, editNameButton, setNameButton, true);
             CommitEdit(fighterWeightclass, editWeightButton, setWeightButton, true);
 
-            // Refresh displayed data
             fighterName.Text = testName;
             fighterWeightclass.Text = testWeight;
 
@@ -209,7 +199,6 @@ namespace Glory_Ranking.Views
             fighterWeightclass.Visibility = Visibility.Visible;
         }
 
-        // --- Helpers ---
         private void ToggleEdit(TextBox textBox, Button editBtn, Button doneBtn)
         {
             textBox.IsEnabled = true;

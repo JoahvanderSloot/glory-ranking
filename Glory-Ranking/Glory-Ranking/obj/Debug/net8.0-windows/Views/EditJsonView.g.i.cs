@@ -76,7 +76,7 @@ namespace Glory_Ranking.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Glory-Ranking;component/views/editjsonview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Glory-Ranking;V1.0.0.0;component/views/editjsonview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\EditJsonView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
