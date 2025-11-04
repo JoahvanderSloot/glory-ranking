@@ -5,7 +5,7 @@ namespace Glory_Ranking
 {
     public static class FighterStorage
     {
-        private static string FilePath = "Fighters.json"; // same as your file
+        private static string FilePath = "Fighters.json";
 
         public static void Save(FighterData data)
         {

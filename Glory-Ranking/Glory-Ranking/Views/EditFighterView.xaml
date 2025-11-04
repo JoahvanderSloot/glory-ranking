@@ -147,16 +147,15 @@
                      VerticalContentAlignment="Center"
                      Margin="0,0,0,15"
                      Text="Peak ranking..."/>
-
-            <!-- Active/Retired -->
             <CheckBox x:Name="checkRetiredOrNot"
-                      Content="Active"
+                      Content="Retired"
                       FontSize="16"
                       FontWeight="SemiBold"
                       IsEnabled="False"
-                      Margin="5,0,0,0"
                       Checked="checkRetiredOrNot_Checked"
-                      Unchecked="checkRetiredOrNot_Unchecked"/>
+                      Unchecked="checkRetiredOrNot_Unchecked" VerticalContentAlignment="Center"/>
+
+            <!-- Active/Retired -->
         </StackPanel>
     </Grid>
 </UserControl>

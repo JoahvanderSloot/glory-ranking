@@ -8,15 +8,15 @@ namespace Glory_Ranking.Views
 {
     public partial class EditFighterView : UserControl
     {
-        string testName = "Joah";
-        string testWeight = "Heavyweight";
+        private Fighter? currentFighter;
+        private string originalName = "";
 
-        List<string> weightClasses = new List<string>()
+        private readonly List<string> weightClasses = new List<string>()
         {
             "None", "Heavyweight", "Light heavyweight", "Middleweight", "Welterweight", "Featherweight"
         };
 
-        List<TextBox> searchInfo;
+        private readonly List<TextBox> searchInfo;
 
         public Action ResetView;
 
@@ -32,8 +32,9 @@ namespace Glory_Ranking.Views
 
             ResetView = () =>
             {
+                searchBox.TextChanged -= searchBox_TextChanged;
                 searchBox.Text = "";
-                txtSearchPlaceholder.Visibility = Visibility.Visible;
+                searchBox.TextChanged += searchBox_TextChanged;
 
                 fighterName.Text = "Name...";
                 fighterWeightclass.Text = "Weightclass...";
@@ -43,23 +44,28 @@ namespace Glory_Ranking.Views
                 SetEditButtonsVisibility(false);
 
                 checkRetiredOrNot.IsEnabled = false;
-                checkRetiredOrNot.IsChecked = false;
-                checkRetiredOrNot.Foreground = Brushes.Silver;
+                SetRetiredCheckbox(false);
 
                 foreach (var _item in searchInfo)
                 {
                     _item.Foreground = Brushes.Silver;
                     _item.IsEnabled = false;
                 }
+
+                fighterWeightDropdown.Visibility = Visibility.Hidden;
+                fighterWeightclass.Visibility = Visibility.Visible;
+
+                currentFighter = null;
+                originalName = "";
             };
+
+            ResetView?.Invoke();
         }
 
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtSearchPlaceholder.Visibility =
-                string.IsNullOrWhiteSpace(searchBox.Text)
-                ? Visibility.Visible
-                : Visibility.Collapsed;
+                string.IsNullOrWhiteSpace(searchBox.Text) ? Visibility.Visible : Visibility.Collapsed;
 
             if (string.IsNullOrWhiteSpace(searchBox.Text))
             {
@@ -67,80 +73,123 @@ namespace Glory_Ranking.Views
                 return;
             }
 
-            if (searchBox.Text.Equals(testName, StringComparison.OrdinalIgnoreCase))
+            var _fighter = FighterManager.GetFighter(searchBox.Text.Trim());
+            if (_fighter != null)
             {
-                LoadFighterData();
-                return;
+                LoadFighterData(_fighter);
             }
-
-            foreach (var _item in searchInfo)
+            else
             {
-                _item.Foreground = Brushes.Silver;
-                _item.IsEnabled = false;
+                ResetProfileView();
             }
-
-            fighterName.Text = "Name...";
-            fighterWeightclass.Text = "Weightclass...";
-            fighterElo.Text = "Ranking...";
-            fighterPeakElo.Text = "Peak ranking...";
-
-            checkRetiredOrNot.IsEnabled = false;
-            checkRetiredOrNot.IsChecked = false;
-            checkRetiredOrNot.Foreground = Brushes.Silver;
-
-            SetEditButtonsVisibility(false);
         }
 
-        private void LoadFighterData()
+        private void LoadFighterData(Fighter _fighter)
         {
-            fighterName.Text = testName;
-            fighterWeightclass.Text = testWeight;
-            fighterElo.Text = "1200";
-            fighterPeakElo.Text = "1350";
+            currentFighter = _fighter;
+            originalName = _fighter.Name;
+
+            fighterName.Text = _fighter.Name;
+            fighterWeightclass.Text = GetWeightClassName(_fighter.Division);
+            fighterElo.Text = _fighter.Elo.ToString();
+            fighterPeakElo.Text = _fighter.PeakElo.ToString();
 
             foreach (var _item in searchInfo)
-            {
                 _item.Foreground = Brushes.Black;
-                _item.IsEnabled = false;
-            }
+
+            fighterName.IsEnabled = false;
+            fighterWeightclass.IsEnabled = false;
+            fighterElo.IsEnabled = false;
+            fighterPeakElo.IsEnabled = false;
 
             checkRetiredOrNot.IsEnabled = true;
-            checkRetiredOrNot.Foreground = Brushes.Black;
+            SetRetiredCheckbox(_fighter.Retired);
 
-            SetEditButtonsVisibility(checkRetiredOrNot.IsChecked == true);
+            bool _canEdit = !_fighter.Retired;
+            SetEditButtonsVisibility(_canEdit);
 
             fighterWeightDropdown.Visibility = Visibility.Hidden;
             fighterWeightclass.Visibility = Visibility.Visible;
+            fighterWeightDropdown.SelectedItem = GetWeightClassName(_fighter.Division);
         }
 
+        private void SetRetiredCheckbox(bool _retired)
+        {
+            // Temporarily detach events
+            checkRetiredOrNot.Checked -= checkRetiredOrNot_Checked;
+            checkRetiredOrNot.Unchecked -= checkRetiredOrNot_Unchecked;
+
+            checkRetiredOrNot.IsChecked = _retired;
+            checkRetiredOrNot.Foreground = Brushes.Black;
+
+            // Reattach events
+            checkRetiredOrNot.Checked += checkRetiredOrNot_Checked;
+            checkRetiredOrNot.Unchecked += checkRetiredOrNot_Unchecked;
+        }
+
+        private string GetWeightClassName(int _division)
+        {
+            return _division switch
+            {
+                1 => "Heavyweight",
+                2 => "Light heavyweight",
+                3 => "Middleweight",
+                4 => "Welterweight",
+                5 => "Featherweight",
+                _ => "None"
+            };
+        }
+
+        private int GetDivisionFromName(string _name)
+        {
+            return _name switch
+            {
+                "Heavyweight" => 1,
+                "Light heavyweight" => 2,
+                "Middleweight" => 3,
+                "Welterweight" => 4,
+                "Featherweight" => 5,
+                _ => 6
+            };
+        }
+
+        private void ResetProfileView()
+        {
+            if (currentFighter == null) return;
+
+            currentFighter = null;
+            ResetView?.Invoke();
+        }
+
+        // --- EDIT NAME ---
         private void EditName_Click(object sender, RoutedEventArgs e)
         {
-            if (checkRetiredOrNot.IsChecked == false) return;
-
+            if (currentFighter == null || currentFighter.Retired) return;
             ToggleEdit(fighterName, editNameButton, setNameButton);
         }
 
         private void SetName_Click(object sender, RoutedEventArgs e)
         {
+            if (currentFighter == null) return;
+
             CommitEdit(fighterName, editNameButton, setNameButton);
+            currentFighter.Name = fighterName.Text.Trim();
+            FighterManager.UpdateFighter(currentFighter);
 
             searchBox.TextChanged -= searchBox_TextChanged;
-
-            testName = fighterName.Text;
-            searchBox.Text = testName;
-            LoadFighterData();
-
+            searchBox.Text = currentFighter.Name;
             searchBox.TextChanged += searchBox_TextChanged;
         }
 
+        // --- EDIT WEIGHTCLASS ---
         private void EditWeight_Click(object sender, RoutedEventArgs e)
         {
-            if (checkRetiredOrNot.IsChecked == false) return;
+            if (currentFighter == null || currentFighter.Retired) return;
 
             fighterWeightDropdown.Visibility = Visibility.Visible;
             fighterWeightclass.Visibility = Visibility.Hidden;
 
-            fighterWeightDropdown.SelectedItem = testWeight;
+            fighterWeightDropdown.SelectedItem = fighterWeightclass.Text;
             fighterWeightDropdown.IsEnabled = true;
 
             editWeightButton.Visibility = Visibility.Hidden;
@@ -149,12 +198,99 @@ namespace Glory_Ranking.Views
 
         private void SetWeight_Click(object sender, RoutedEventArgs e)
         {
+            if (currentFighter == null) return;
+
             if (fighterWeightDropdown.SelectedItem != null)
             {
-                testWeight = fighterWeightDropdown.SelectedItem.ToString();
-                fighterWeightclass.Text = testWeight;
+                string _selectedWeight = fighterWeightDropdown.SelectedItem.ToString();
+                fighterWeightclass.Text = _selectedWeight;
+                currentFighter.Division = GetDivisionFromName(_selectedWeight);
+                FighterManager.UpdateFighter(currentFighter);
             }
 
+            CommitWeightEdit();
+        }
+
+        // --- RETIRED STATUS ---
+        private void checkRetiredOrNot_Checked(object sender, RoutedEventArgs e)
+        {
+            if (currentFighter == null) return;
+
+            SavePendingEdits();
+
+            currentFighter.Retired = true;
+            FighterManager.UpdateFighter(currentFighter);
+
+            SetEditButtonsVisibility(false);
+        }
+
+        private void checkRetiredOrNot_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (currentFighter == null) return;
+
+            SavePendingEdits();
+
+            currentFighter.Retired = false;
+            FighterManager.UpdateFighter(currentFighter);
+
+            SetEditButtonsVisibility(true);
+        }
+
+        private void SavePendingEdits()
+        {
+            if (currentFighter == null) return;
+
+            // Save name if being edited
+            if (fighterName.IsEnabled)
+            {
+                currentFighter.Name = fighterName.Text.Trim();
+                FighterManager.UpdateFighter(currentFighter);
+
+                searchBox.TextChanged -= searchBox_TextChanged;
+                searchBox.Text = currentFighter.Name;
+                searchBox.TextChanged += searchBox_TextChanged;
+
+                CommitEdit(fighterName, editNameButton, setNameButton);
+            }
+
+            // Save weight if being edited
+            if (fighterWeightDropdown.Visibility == Visibility.Visible)
+            {
+                if (fighterWeightDropdown.SelectedItem != null)
+                {
+                    string _selectedWeight = fighterWeightDropdown.SelectedItem.ToString();
+                    fighterWeightclass.Text = _selectedWeight;
+                    currentFighter.Division = GetDivisionFromName(_selectedWeight);
+                    FighterManager.UpdateFighter(currentFighter);
+                }
+
+                fighterWeightDropdown.Visibility = Visibility.Hidden;
+                fighterWeightclass.Visibility = Visibility.Visible;
+                setWeightButton.Visibility = Visibility.Hidden;
+                editWeightButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        // --- HELPERS ---
+        private void ToggleEdit(TextBox _textBox, Button _editBtn, Button _doneBtn)
+        {
+            _textBox.IsEnabled = true;
+            _textBox.Focus();
+            _textBox.CaretIndex = _textBox.Text.Length;
+            _editBtn.Visibility = Visibility.Hidden;
+            _doneBtn.Visibility = Visibility.Visible;
+        }
+
+        private void CommitEdit(TextBox _textBox, Button _editBtn, Button _doneBtn, bool _forceHide = false)
+        {
+            _textBox.IsEnabled = false;
+            _editBtn.Visibility = _forceHide ? Visibility.Hidden : Visibility.Visible;
+            _doneBtn.Visibility = Visibility.Hidden;
+        }
+
+        private void CommitWeightEdit()
+        {
+            fighterWeightDropdown.IsEnabled = false;
             fighterWeightDropdown.Visibility = Visibility.Hidden;
             fighterWeightclass.Visibility = Visibility.Visible;
 
@@ -162,72 +298,10 @@ namespace Glory_Ranking.Views
             editWeightButton.Visibility = Visibility.Visible;
         }
 
-        private void checkRetiredOrNot_Checked(object sender, RoutedEventArgs e)
+        private void SetEditButtonsVisibility(bool _enabled)
         {
-            SetEditButtonsVisibility(true);
-        }
-
-        private void checkRetiredOrNot_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (fighterName.IsEnabled)
-            {
-                testName = fighterName.Text;
-                searchBox.TextChanged -= searchBox_TextChanged;
-                searchBox.Text = testName;
-                searchBox.TextChanged += searchBox_TextChanged;
-            }
-
-            if (fighterWeightDropdown.Visibility == Visibility.Visible)
-            {
-                if (fighterWeightDropdown.SelectedItem != null)
-                    testWeight = fighterWeightDropdown.SelectedItem.ToString();
-                else
-                    testWeight = fighterWeightclass.Text;
-            }
-            else if (fighterWeightclass.IsEnabled)
-            {
-                testWeight = fighterWeightclass.Text;
-            }
-
-            CommitEdit(fighterName, editNameButton, setNameButton, true);
-            CommitEdit(fighterWeightclass, editWeightButton, setWeightButton, true);
-
-            fighterName.Text = testName;
-            fighterWeightclass.Text = testWeight;
-
-            fighterWeightDropdown.Visibility = Visibility.Hidden;
-            fighterWeightclass.Visibility = Visibility.Visible;
-        }
-
-        private void ToggleEdit(TextBox textBox, Button editBtn, Button doneBtn)
-        {
-            textBox.IsEnabled = true;
-            textBox.Focus();
-            textBox.CaretIndex = textBox.Text.Length;
-            editBtn.Visibility = Visibility.Hidden;
-            doneBtn.Visibility = Visibility.Visible;
-        }
-
-        private void CommitEdit(TextBox textBox, Button editBtn, Button doneBtn, bool forceHide = false)
-        {
-            textBox.IsEnabled = false;
-
-            if (!forceHide)
-            {
-                editBtn.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                editBtn.Visibility = Visibility.Hidden;
-            }
-
-            doneBtn.Visibility = Visibility.Hidden;
-        }
-
-        private void SetEditButtonsVisibility(bool enabled)
-        {
-            editNameButton.Visibility = enabled ? Visibility.Visible : Visibility.Hidden;
-            editWeightButton.Visibility = enabled ? Visibility.Visible : Visibility.Hidden;
+            editNameButton.Visibility = _enabled ? Visibility.Visible : Visibility.Hidden;
+            editWeightButton.Visibility = _enabled ? Visibility.Visible : Visibility.Hidden;
 
             setNameButton.Visibility = Visibility.Hidden;
             setWeightButton.Visibility = Visibility.Hidden;

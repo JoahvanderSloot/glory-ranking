@@ -10,5 +10,5 @@
 public class FighterData
 {
     public string Version = "fighter-data-v1";
-    public Fighter[] Fighters;
+    public Fighter[] Fighters { get; set; } = Array.Empty<Fighter>();
 }

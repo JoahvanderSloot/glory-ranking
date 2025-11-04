@@ -8,6 +8,12 @@ namespace Glory_Ranking
         public MainWindow()
         {
             InitializeComponent();
+
+            // Load fighters from JSON when the app starts
+            FighterManager.LoadFighters();
+
+            // Refresh the leaderboard so it shows the loaded fighters
+            LeaderboardTab?.RefreshLeaderboard();
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -19,6 +25,9 @@ namespace Glory_Ranking
 
                 // Reset EditFighterView if it exists
                 EditFighterTab?.ResetView?.Invoke();
+
+                // Refresh LeaderboardView if it exists
+                LeaderboardTab?.RefreshLeaderboard();
             }
         }
     }

@@ -33,60 +33,76 @@ namespace Glory_Ranking.Views
             };
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            if (sender is RadioButton rb)
-            {
-                //handle selected weight
-            }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (sender == submitNewFighterButton)
             {
-                var fighterName = newFighterNameInput.Text.Trim();
-                if (string.IsNullOrWhiteSpace(fighterName))
+                var _fighterName = newFighterNameInput.Text.Trim();
+                if (string.IsNullOrWhiteSpace(_fighterName))
                 {
                     fighterAddedInfoText.Text = "Please enter a fighter name.";
                     fighterAddedInfoText.Foreground = System.Windows.Media.Brushes.Red;
                     return;
                 }
 
-                fighterAddedInfoText.Text = $"{fighterName} added successfully!";
+                // Check if fighter already exists
+                if (FighterManager.GetFighter(_fighterName) != null)
+                {
+                    fighterAddedInfoText.Text = $"{_fighterName} already exists!";
+                    fighterAddedInfoText.Foreground = System.Windows.Media.Brushes.OrangeRed;
+                    return;
+                }
+
+                // Get selected division
+                int division = weightClassDropdown.SelectedIndex + 1;
+                if (weightClassDropdown.SelectedIndex == -1)
+                {
+                    FighterManager.AddFighter(_fighterName, 6);
+                    fighterAddedInfoText.Text = $"{_fighterName} added without weightclass";
+                }
+                else
+                {
+                    FighterManager.AddFighter(_fighterName, division);
+                    fighterAddedInfoText.Text = $"{_fighterName} added successfully!";
+                }
+
                 fighterAddedInfoText.Foreground = System.Windows.Media.Brushes.Blue;
 
+                // Reset inputs
                 newFighterNameInput.Clear();
-                newFighterNameOverlay.Visibility = Visibility.Visible;
+                newFighterNameOverlay.Visibility = System.Windows.Visibility.Visible;
                 weightClassDropdown.SelectedIndex = -1;
-                weightClassPlaceholder.Visibility = Visibility.Visible;
+                weightClassPlaceholder.Visibility = System.Windows.Visibility.Visible;
             }
             else if (sender == submitFightButton)
             {
-                var winner = winnerTextInput.Text.Trim();
-                var loser = loserTextInput.Text.Trim();
+                var _winner = winnerTextInput.Text.Trim();
+                var _loser = loserTextInput.Text.Trim();
 
-                if (string.IsNullOrWhiteSpace(winner) || string.IsNullOrWhiteSpace(loser))
+                if (string.IsNullOrWhiteSpace(_winner) || string.IsNullOrWhiteSpace(_loser))
                 {
                     newFightOutputLabel.Text = "Both winner and loser names are required.";
                     newFightOutputLabel.Foreground = System.Windows.Media.Brushes.Red;
                     return;
                 }
 
-                if (winner == loser)
+                if (_winner == _loser)
                 {
                     newFightOutputLabel.Text = "Winner and loser cannot be the same.";
                     newFightOutputLabel.Foreground = System.Windows.Media.Brushes.Red;
                     return;
                 }
 
-                newFightOutputLabel.Text = $"Fight recorded: {winner} defeated {loser}.";
+                // Record the fight in backend
+                FighterManager.RecordFight(_winner, _loser);
+
+                newFightOutputLabel.Text = $"Fight recorded: {_winner} defeated {_loser}.";
                 newFightOutputLabel.Foreground = System.Windows.Media.Brushes.Blue;
 
                 winnerTextInput.Clear();
                 loserTextInput.Clear();
-                winnerTextOverlay.Visibility = Visibility.Visible;
-                loserTextOverlay.Visibility = Visibility.Visible;
+                winnerTextOverlay.Visibility = System.Windows.Visibility.Visible;
+                loserTextOverlay.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
@@ -123,11 +139,11 @@ namespace Glory_Ranking.Views
         private void WeightClassDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Show or hide placeholder based on selection
-            if (weightClassDropdown.SelectedItem is ComboBoxItem selected)
+            if (weightClassDropdown.SelectedItem is ComboBoxItem _selected)
             {
                 weightClassPlaceholder.Visibility = Visibility.Hidden;
-                string selectedWeight = selected.Content.ToString();
-                Console.WriteLine($"Selected weightclass: {selectedWeight}");
+                string _selectedWeight = _selected.Content.ToString();
+                Console.WriteLine($"Selected weightclass: {_selectedWeight}");
             }
             else
             {
