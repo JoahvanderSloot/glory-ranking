@@ -67,20 +67,44 @@ namespace Glory_Ranking.Views
             txtSearchPlaceholder.Visibility =
                 string.IsNullOrWhiteSpace(searchBox.Text) ? Visibility.Visible : Visibility.Collapsed;
 
-            if (string.IsNullOrWhiteSpace(searchBox.Text))
+            string _input = searchBox.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(_input))
             {
                 ResetView?.Invoke();
                 return;
             }
 
-            var _fighter = FighterManager.GetFighter(searchBox.Text.Trim());
-            if (_fighter != null)
+            // Try to get a fighter with an exact name match (case-insensitive)
+            var _fighter = FighterManager.GetFighter(_input);
+
+            if (_fighter != null && string.Equals(_fighter.Name, _input, StringComparison.OrdinalIgnoreCase))
             {
+                // Only load if full match
                 LoadFighterData(_fighter);
             }
             else
             {
-                ResetProfileView();
+                // If not a full match, do not reset or overwrite the input
+                currentFighter = null;
+
+                // Keep placeholder hidden but don't invoke ResetView()
+                fighterName.Text = "Name...";
+                fighterWeightclass.Text = "Weightclass...";
+                fighterElo.Text = "Ranking...";
+                fighterPeakElo.Text = "Peak ranking...";
+
+                foreach (var _item in searchInfo)
+                {
+                    _item.Foreground = Brushes.Silver;
+                    _item.IsEnabled = false;
+                }
+
+                SetEditButtonsVisibility(false);
+                checkRetiredOrNot.IsEnabled = false;
+                SetRetiredCheckbox(false);
+                fighterWeightDropdown.Visibility = Visibility.Hidden;
+                fighterWeightclass.Visibility = Visibility.Visible;
             }
         }
 
@@ -153,15 +177,6 @@ namespace Glory_Ranking.Views
             };
         }
 
-        private void ResetProfileView()
-        {
-            if (currentFighter == null) return;
-
-            currentFighter = null;
-            ResetView?.Invoke();
-        }
-
-        // --- EDIT NAME ---
         private void EditName_Click(object sender, RoutedEventArgs e)
         {
             if (currentFighter == null || currentFighter.Retired) return;
@@ -181,7 +196,6 @@ namespace Glory_Ranking.Views
             searchBox.TextChanged += searchBox_TextChanged;
         }
 
-        // --- EDIT WEIGHTCLASS ---
         private void EditWeight_Click(object sender, RoutedEventArgs e)
         {
             if (currentFighter == null || currentFighter.Retired) return;
@@ -211,7 +225,6 @@ namespace Glory_Ranking.Views
             CommitWeightEdit();
         }
 
-        // --- RETIRED STATUS ---
         private void checkRetiredOrNot_Checked(object sender, RoutedEventArgs e)
         {
             if (currentFighter == null) return;
@@ -240,7 +253,6 @@ namespace Glory_Ranking.Views
         {
             if (currentFighter == null) return;
 
-            // Save name if being edited
             if (fighterName.IsEnabled)
             {
                 currentFighter.Name = fighterName.Text.Trim();
@@ -253,7 +265,6 @@ namespace Glory_Ranking.Views
                 CommitEdit(fighterName, editNameButton, setNameButton);
             }
 
-            // Save weight if being edited
             if (fighterWeightDropdown.Visibility == Visibility.Visible)
             {
                 if (fighterWeightDropdown.SelectedItem != null)
@@ -271,7 +282,6 @@ namespace Glory_Ranking.Views
             }
         }
 
-        // --- HELPERS ---
         private void ToggleEdit(TextBox _textBox, Button _editBtn, Button _doneBtn)
         {
             _textBox.IsEnabled = true;

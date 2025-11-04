@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -52,14 +53,18 @@ namespace Glory_Ranking
 
             var _fighters = FighterManager.Fighters.AsEnumerable();
 
+            // Filter by division
             if (currentDivision >= 0 && currentDivision < 5)
                 _fighters = _fighters.Where(f => f.Division == currentDivision + 1);
 
+            // Hide retired if not checked
             if (retiredCheckbox.IsChecked != true)
                 _fighters = _fighters.Where(f => !f.Retired);
 
+            // Sort by Elo descending
             _fighters = _fighters.OrderByDescending(f => f.Elo);
 
+            // Build the leaderboard list
             int _rank = 1;
             foreach (var f in _fighters)
             {
@@ -73,11 +78,13 @@ namespace Glory_Ranking
                     _ => "None"
                 };
 
-                string _entry = $"{_rank}. {f.Name} - Elo: {f.Elo} ({_weightName})";
+                // Add #number in front
+                string _entry = $"#{_rank}. {f.Name} - Elo: {f.Elo} ({_weightName})";
                 fullLeaderboardList.Items.Add(_entry);
                 _rank++;
             }
 
+            // Handle empty list
             if (!_fighters.Any())
                 fullLeaderboardList.Items.Add("No fighters in this division yet.");
         }
@@ -95,7 +102,7 @@ namespace Glory_Ranking
 
             string _selectedText = fullLeaderboardList.SelectedItem.ToString();
 
-            // Extract name between ". " and " - Elo:"
+            // Extract fighter name between ". " and " - Elo:"
             int startIndex = _selectedText.IndexOf(". ");
             int endIndex = _selectedText.IndexOf(" - Elo:");
 
@@ -108,6 +115,7 @@ namespace Glory_Ranking
             _fighterWindow.Show();
         }
 
+        // --- Cleanup when window closes ---
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);

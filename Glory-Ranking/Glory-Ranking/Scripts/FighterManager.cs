@@ -59,19 +59,15 @@ namespace Glory_Ranking
             int _winnerOldElo = _winner.Elo;
             int _loserOldElo = _loser.Elo;
 
-            // Calculate new Elo
             _winner.Elo = (int)(_winner.Elo + k * (1 - _expectedWinner));
             _loser.Elo = (int)(_loser.Elo + k * (0 - _expectedLoser));
 
-            // Update peak Elo
             _winner.PeakElo = Math.Max(_winner.PeakElo, _winner.Elo);
             _loser.PeakElo = Math.Max(_loser.PeakElo, _loser.Elo);
 
-            // Update Wins/Losses
             _winner.Wins++;
             _loser.Losses++;
 
-            // Update Biggest Elo Gain/Loss
             int _winnerEloGain = _winner.Elo - _winnerOldElo;
             int _loserEloLoss = _loserOldElo - _loser.Elo;
 
@@ -84,15 +80,33 @@ namespace Glory_Ranking
             SaveFighters();
         }
 
-        public static List<Fighter> GetLeaderboard(int? _division = null, int top = 10)
+        public static List<Fighter> GetLeaderboard(int? _division = null, int _top = 10)
         {
             var _query = Fighters.AsEnumerable();
             if (_division.HasValue)
                 _query = _query.Where(_f => _f.Division == _division.Value);
 
             return _query.OrderByDescending(_f => _f.Elo)
-                        .Take(top)
+                        .Take(_top)
                         .ToList();
+        }
+
+        public static void SaveToFile()
+        {
+            SaveFighters();
+        }
+
+        public static void LoadFromFile()
+        {
+            LoadFighters();
+            if (Fighters == null)
+                Fighters = new List<Fighter>();
+        }
+
+        public static void ResetFighters()
+        {
+            FighterStorage.Reset();
+            LoadFighters();
         }
     }
 }
