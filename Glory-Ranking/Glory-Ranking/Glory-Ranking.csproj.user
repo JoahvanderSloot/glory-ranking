@@ -10,6 +10,9 @@
     <Compile Update="FighterWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="FullLeaderboard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AddFightView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

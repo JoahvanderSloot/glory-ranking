@@ -9,47 +9,56 @@
 
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*"/>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="137*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Division ComboBox -->
         <ComboBox x:Name="leaderboardDivision"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
-                  Width="360"
-                  Height="35"
-                  FontSize="16"
-                  FontWeight="SemiBold"
-                  Foreground="Black"
-                  BorderBrush="Black"
-                  SelectionChanged="leaderboardDivision_SelectionChanged" Margin="0,16,0,0" Grid.ColumnSpan="3" SelectedIndex="5">
+              Grid.Column="0"
+              VerticalAlignment="Top"
+              Width="360"
+              Height="35"
+              FontSize="16"
+              FontWeight="SemiBold"
+              Foreground="Black"
+              BorderBrush="Black"
+              SelectionChanged="leaderboardDivision_SelectionChanged"
+              Margin="0,16,10,0"
+              SelectedIndex="5" VerticalContentAlignment="Center">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
                     <GradientStop Color="White" Offset="1"/>
                 </LinearGradientBrush>
             </ComboBox.Background>
-            <ComboBoxItem FontWeight="Normal">Heavyweight</ComboBoxItem>
-            <ComboBoxItem FontWeight="Normal">Light heavyweight</ComboBoxItem>
-            <ComboBoxItem FontWeight="Normal">Middleweight</ComboBoxItem>
-            <ComboBoxItem FontWeight="Normal">Welterweight</ComboBoxItem>
-            <ComboBoxItem FontWeight="Normal">Featherweight</ComboBoxItem>
-            <ComboBoxItem FontWeight="Normal">All weightclasses</ComboBoxItem>
+            <ComboBoxItem>Heavyweight</ComboBoxItem>
+            <ComboBoxItem>Light heavyweight</ComboBoxItem>
+            <ComboBoxItem>Middleweight</ComboBoxItem>
+            <ComboBoxItem>Welterweight</ComboBoxItem>
+            <ComboBoxItem>Featherweight</ComboBoxItem>
+            <ComboBoxItem>All weightclasses</ComboBoxItem>
         </ComboBox>
 
-        <!-- Placeholder Text -->
+        <!-- Open weight ranking Button -->
+        <Button x:Name="openWeightRankingBtn"
+            Grid.Column="1"
+            VerticalAlignment="Top"
+            Margin="0,19,0,0"
+            Width="30" Height="30"
+            BorderBrush="{x:Null}"
+            Background="Transparent"
+            ToolTip="Open ranking" RenderTransformOrigin="0.4,0.967" Click="openWeightRankingBtn_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Image Source="/Assets/Sprites/GoButtonSprite.png" Width="30" Height="30"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
         <!-- Retired Fighters Toggle -->
-        <CheckBox x:Name="retiredCheckbox"
-                  Content="Retired"
-                  FontSize="14"
-                  FontWeight="SemiBold"
-                  VerticalAlignment="Top"
-                  Margin="0,16,30,0"
-                  Height="35"
-                  IsChecked="False" RenderTransformOrigin="0.5,1.482" Grid.Column="2" HorizontalAlignment="Right" Width="120">
+        <CheckBox x:Name="retiredCheckbox" Content="Retired" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Top" Margin="0,16,-15,0" Height="35" IsChecked="False" RenderTransformOrigin="0.5,1.482" Grid.Column="2" HorizontalAlignment="Right" Width="120">
             <CheckBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.75" ScaleY="0.8"/>
@@ -66,24 +75,11 @@
                             <ControlTemplate TargetType="CheckBox">
                                 <Grid>
                                     <!-- Outer pill -->
-                                    <Border x:Name="border"
-                                            Width="120"
-                                            Height="35"
-                                            CornerRadius="18"
-                                            Background="#DDD"
-                                            BorderBrush="#AAA"
-                                            BorderThickness="1"/>
+                                    <Border x:Name="border" Width="120" Height="35" CornerRadius="18" Background="#DDD" BorderBrush="#AAA" BorderThickness="1"/>
                                     <!-- Knob -->
-                                    <Ellipse x:Name="switchKnob"
-                                             Width="31"
-                                             Height="31"
-                                             Fill="White"
-                                             Margin="2"
-                                             HorizontalAlignment="Left"
-                                             VerticalAlignment="Center"/>
+                                    <Ellipse x:Name="switchKnob" Width="31" Height="31" Fill="White" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                     <!-- Label -->
-                                    <ContentPresenter HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsChecked" Value="True">
@@ -106,12 +102,21 @@
 
         <!-- Leaderboard List -->
         <ListBox x:Name="leaderboardBox"
-                 Margin="0,60,0,0"
-                 BorderBrush="Black"
-                 FontWeight="Normal"
-                 FontSize="13"
-                 Background="White" Grid.ColumnSpan="3"/>
-        <Label Content="Weightclass:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Height="26" Grid.ColumnSpan="3" Margin="0,-10,0,0" FontSize="13" FontWeight="Bold"/>
+             Grid.ColumnSpan="3"
+             Margin="0,60,0,0"
+             BorderBrush="Black"
+             FontWeight="Normal"
+             FontSize="13"
+             Background="White"/>
 
+        <Label Content="Weightclass:"
+           HorizontalAlignment="Left"
+           VerticalAlignment="Top"
+           Width="105"
+           Height="26"
+           Grid.ColumnSpan="3"
+           Margin="0,-10,0,0"
+           FontSize="13"
+           FontWeight="Bold"/>
     </Grid>
 </UserControl>

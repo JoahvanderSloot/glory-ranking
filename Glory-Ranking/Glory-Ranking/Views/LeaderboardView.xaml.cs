@@ -5,8 +5,6 @@ namespace Glory_Ranking.Views
 {
     public partial class LeaderboardView : UserControl
     {
-        FighterWindow fighterWindow = new FighterWindow();
-
         public LeaderboardView()
         {
             InitializeComponent();
@@ -23,15 +21,15 @@ namespace Glory_Ranking.Views
         {
             if (leaderboardBox.SelectedItem == null) return;
 
-            string selectedText = leaderboardBox.SelectedItem.ToString();
-            int index = selectedText.IndexOf(" - Elo:");
-            if (index < 0) return;
+            string _selectedText = leaderboardBox.SelectedItem.ToString();
+            int _index = _selectedText.IndexOf(" - Elo:");
+            if (_index < 0) return;
 
-            string fighterName = selectedText.Substring(0, index);
+            string _fighterName = _selectedText.Substring(0, _index);
 
-            var fighterWindow = new FighterWindow();
-            fighterWindow.OpenFighter(fighterName);
-            fighterWindow.Show();
+            var _fighterWindow = new FighterWindow();
+            _fighterWindow.OpenFighter(_fighterName);
+            _fighterWindow.Show();
         }
 
         private void RetiredCheckbox_Changed(object sender, System.Windows.RoutedEventArgs e)
@@ -97,6 +95,13 @@ namespace Glory_Ranking.Views
 
                 leaderboardBox.Items.Add(_display);
             }
+        }
+
+        private void openWeightRankingBtn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var _leaderboard = new FullLeaderboard();
+            _leaderboard.OpenLeaderboard(leaderboardDivision.SelectedIndex);
+            _leaderboard.Show();
         }
     }
 }
