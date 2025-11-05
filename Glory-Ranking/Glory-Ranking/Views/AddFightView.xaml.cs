@@ -93,6 +93,14 @@ namespace Glory_Ranking.Views
                     return;
                 }
 
+                // **Check if both fighters exist**
+                if (FighterManager.GetFighter(_winner) == null || FighterManager.GetFighter(_loser) == null)
+                {
+                    newFightOutputLabel.Text = "Both fighters must exist to record a fight.";
+                    newFightOutputLabel.Foreground = System.Windows.Media.Brushes.Red;
+                    return;
+                }
+
                 // Record the fight in backend
                 FighterManager.RecordFight(_winner, _loser);
 
