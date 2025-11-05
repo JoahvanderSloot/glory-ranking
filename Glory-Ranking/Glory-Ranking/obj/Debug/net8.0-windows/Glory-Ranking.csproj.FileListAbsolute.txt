@@ -64,3 +64,5 @@ C:\Users\joahv\Documents\WPF\GloryRanking\glory-ranking\Glory-Ranking\Glory-Rank
 C:\Users\joahv\Documents\WPF\GloryRanking\glory-ranking\Glory-Ranking\Glory-Ranking\obj\Debug\net8.0-windows\FighterWindow.baml
 C:\Users\joahv\Documents\WPF\GloryRanking\glory-ranking\Glory-Ranking\Glory-Ranking\obj\Debug\net8.0-windows\FullLeaderboard.g.cs
 C:\Users\joahv\Documents\WPF\GloryRanking\glory-ranking\Glory-Ranking\Glory-Ranking\obj\Debug\net8.0-windows\FullLeaderboard.baml
+C:\Users\joahv\OneDrive\Documenten\WPF\glory-ranking\Glory-Ranking\Glory-Ranking\obj\Debug\net8.0-windows\FullLeaderboard.baml
+C:\Users\joahv\OneDrive\Documenten\WPF\glory-ranking\Glory-Ranking\Glory-Ranking\obj\Debug\net8.0-windows\FullLeaderboard.g.cs

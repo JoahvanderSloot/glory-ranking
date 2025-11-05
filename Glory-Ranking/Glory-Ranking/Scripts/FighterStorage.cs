@@ -16,9 +16,9 @@ namespace Glory_Ranking
                 string _json = JsonSerializer.Serialize(_data, _options);
                 File.WriteAllText(FilePath, _json);
             }
-            catch (Exception ex)
+            catch (Exception _ex)
             {
-                Console.WriteLine($"Error saving fighters: {ex.Message}");
+                Console.WriteLine($"Error saving fighters: {_ex.Message}");
             }
         }
 

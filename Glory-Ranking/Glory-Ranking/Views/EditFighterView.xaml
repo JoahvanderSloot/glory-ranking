@@ -7,30 +7,91 @@
              d:DesignHeight="600" d:DesignWidth="800"
              Background="White">
 
+    <UserControl.Resources>
+        <!-- 🔹 Reusable hover-scale button style -->
+        <Style x:Key="HoverScaleButton" TargetType="Button">
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                 To="1.2" Duration="0:0:0.12"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                 To="1.2" Duration="0:0:0.12"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                 To="1.0" Duration="0:0:0.12"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                 To="1.0" Duration="0:0:0.12"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
     <Grid Margin="30">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        
         <!-- Search Bar -->
         <Grid Margin="0,0,0,20">
             <TextBox x:Name="searchBox"
-                     FontSize="16"
-                     FontWeight="SemiBold"
-                     Padding="10,5"
-                     BorderBrush="Black"
-                     VerticalContentAlignment="Center"
-                     TextChanged="searchBox_TextChanged"/>
-            <TextBlock x:Name="txtSearchPlaceholder"
-                       Text="Search fighter..."
-                       Foreground="#888"
-                       FontStyle="Italic"
-                       VerticalAlignment="Center"
-                       Margin="13,0,0,0"
-                       IsHitTestVisible="False"/>
-        </Grid>
+             FontSize="16"
+             FontWeight="SemiBold"
+             Padding="10,5"
+             BorderBrush="Black"
+             VerticalContentAlignment="Center"
+             TextChanged="searchBox_TextChanged"
+             KeyDown="searchBox_KeyDown"/>
 
+            <TextBlock x:Name="txtSearchPlaceholder"
+               Text="Search fighter..."
+               Foreground="#888"
+               FontStyle="Italic"
+               VerticalAlignment="Center"
+               Margin="13,0,0,0"
+               IsHitTestVisible="False"/>
+
+            <Popup x:Name="suggestionPopup"
+           Placement="Bottom"
+           PlacementTarget="{Binding ElementName=searchBox}"
+           StaysOpen="False"
+           AllowsTransparency="True"
+           PopupAnimation="Slide"
+           VerticalOffset="1">
+                <Border Background="White"
+                BorderBrush="Black"
+                BorderThickness="1"
+                CornerRadius="3"
+                SnapsToDevicePixels="True"
+                Width="{Binding ActualWidth, ElementName=searchBox}">
+                    <ListBox x:Name="suggestionBox"
+                     MaxHeight="150"
+                     Background="White"
+                     BorderThickness="0"
+                     FontSize="16"
+                     MouseLeftButtonUp="suggestionBox_MouseLeftButtonUp"
+                     PreviewKeyDown="Box_PreviewKeyDown"/>
+                </Border>
+            </Popup>
+        </Grid>
+        
         <!-- Editable Fields -->
         <StackPanel Grid.Row="1"
                     Orientation="Vertical"
@@ -48,11 +109,13 @@
                          IsEnabled="False"
                          VerticalContentAlignment="Center"
                          Text="Name..."/>
+
                 <Button x:Name="editNameButton"
                         Width="28" Height="28"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Click="EditName_Click"
+                        Style="{StaticResource HoverScaleButton}"
                         BorderBrush="{x:Null}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -62,12 +125,15 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
+
                 <Button x:Name="setNameButton"
                         Width="28" Height="28"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Click="SetName_Click"
-                        Visibility="Hidden" BorderBrush="{x:Null}">
+                        Visibility="Hidden"
+                        Style="{StaticResource HoverScaleButton}"
+                        BorderBrush="{x:Null}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>
@@ -101,6 +167,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Click="EditWeight_Click"
+                        Style="{StaticResource HoverScaleButton}"
                         BorderBrush="{x:Null}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -110,12 +177,15 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
+
                 <Button x:Name="setWeightButton"
                         Width="28" Height="28"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Click="SetWeight_Click"
-                        Visibility="Hidden" BorderBrush="{x:Null}">
+                        Visibility="Hidden"
+                        Style="{StaticResource HoverScaleButton}"
+                        BorderBrush="{x:Null}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>
@@ -147,15 +217,16 @@
                      VerticalContentAlignment="Center"
                      Margin="0,0,0,15"
                      Text="Peak ranking..."/>
+
+            <!-- Retired Checkbox -->
             <CheckBox x:Name="checkRetiredOrNot"
                       Content="Retired"
                       FontSize="16"
                       FontWeight="SemiBold"
                       IsEnabled="False"
                       Checked="checkRetiredOrNot_Checked"
-                      Unchecked="checkRetiredOrNot_Unchecked" VerticalContentAlignment="Center"/>
-
-            <!-- Active/Retired -->
+                      Unchecked="checkRetiredOrNot_Unchecked"
+                      VerticalContentAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

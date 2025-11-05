@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Glory_Ranking.Views
 {
     public partial class EditFighterView : UserControl
     {
+        private List<Fighter> allFighters = new List<Fighter>();
+
         private Fighter? currentFighter;
         private string originalName = "";
 
@@ -23,6 +26,8 @@ namespace Glory_Ranking.Views
         public EditFighterView()
         {
             InitializeComponent();
+
+            allFighters = FighterManager.GetAllFighters(); // Make sure FighterManager has this method returning List<Fighter>
 
             searchInfo = new List<TextBox> { fighterName, fighterWeightclass, fighterElo, fighterPeakElo };
 
@@ -71,41 +76,69 @@ namespace Glory_Ranking.Views
 
             if (string.IsNullOrWhiteSpace(_input))
             {
-                ResetView?.Invoke();
+                suggestionPopup.IsOpen = false;
+                ResetView?.Invoke(); // Clear everything if search is empty
                 return;
             }
 
-            // Try to get a fighter with an exact name match (case-insensitive)
-            var _fighter = FighterManager.GetFighter(_input);
+            // Always get fresh fighter list
+            var allFighters = FighterManager.GetAllFighters();
 
-            if (_fighter != null && string.Equals(_fighter.Name, _input, StringComparison.OrdinalIgnoreCase))
+            // Get up to 5 suggestions containing the input
+            var _suggestions = allFighters
+                .Where(f => f.Name.Contains(_input, StringComparison.OrdinalIgnoreCase))
+                .Select(f => f.Name)
+                .Take(5)
+                .ToList();
+
+            if (_suggestions.Any())
             {
-                // Only load if full match
-                LoadFighterData(_fighter);
+                suggestionBox.ItemsSource = _suggestions;
+                suggestionBox.SelectedIndex = 0;
+                suggestionPopup.IsOpen = true;
+
+                // 🔹 New: auto-load if exact match and only 1 suggestion
+                if (_suggestions.Count == 1 &&
+                    string.Equals(_input, _suggestions[0], StringComparison.OrdinalIgnoreCase))
+                {
+                    SelectSuggestion(_suggestions[0]);
+                    return; // exit early, no need to show the popup
+                }
             }
             else
             {
-                // If not a full match, do not reset or overwrite the input
-                currentFighter = null;
-
-                // Keep placeholder hidden but don't invoke ResetView()
-                fighterName.Text = "Name...";
-                fighterWeightclass.Text = "Weightclass...";
-                fighterElo.Text = "Ranking...";
-                fighterPeakElo.Text = "Peak ranking...";
-
-                foreach (var _item in searchInfo)
-                {
-                    _item.Foreground = Brushes.Silver;
-                    _item.IsEnabled = false;
-                }
-
-                SetEditButtonsVisibility(false);
-                checkRetiredOrNot.IsEnabled = false;
-                SetRetiredCheckbox(false);
-                fighterWeightDropdown.Visibility = Visibility.Hidden;
-                fighterWeightclass.Visibility = Visibility.Visible;
+                suggestionPopup.IsOpen = false;
             }
+
+            // 🔹 If input no longer matches the loaded fighter, reset view
+            if (currentFighter != null &&
+                !string.Equals(_input, currentFighter.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                currentFighter = null;
+                ResetViewProperties();
+            }
+        }
+
+        // Helper to reset only the fighter info fields (not the search box)
+        private void ResetViewProperties()
+        {
+            fighterName.Text = "Name...";
+            fighterWeightclass.Text = "Weightclass...";
+            fighterElo.Text = "Ranking...";
+            fighterPeakElo.Text = "Peak ranking...";
+
+            foreach (var _item in searchInfo)
+            {
+                _item.Foreground = Brushes.Silver;
+                _item.IsEnabled = false;
+            }
+
+            SetEditButtonsVisibility(false);
+            checkRetiredOrNot.IsEnabled = false;
+            SetRetiredCheckbox(false);
+
+            fighterWeightDropdown.Visibility = Visibility.Hidden;
+            fighterWeightclass.Visibility = Visibility.Visible;
         }
 
         private void LoadFighterData(Fighter _fighter)
@@ -315,6 +348,92 @@ namespace Glory_Ranking.Views
 
             setNameButton.Visibility = Visibility.Hidden;
             setWeightButton.Visibility = Visibility.Hidden;
+        }
+
+        private void MouseHoverEnter(object sender, MouseEventArgs e)
+        {
+            Button _sendButton = sender as Button;
+            if (_sendButton.RenderTransform is ScaleTransform _st)
+            {
+                _st.ScaleX = 1.1;
+                _st.ScaleY = 1.1;
+            }
+        }
+
+        private void MouseHoverExit(object sender, MouseEventArgs e)
+        {
+            Button _sendButton = sender as Button;
+            if (_sendButton.RenderTransform is ScaleTransform _st)
+            {
+                _st.ScaleX = 1.0;
+                _st.ScaleY = 1.0;
+            }
+        }
+
+        private void suggestionBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (suggestionBox.SelectedItem != null)
+            {
+                SelectSuggestion(suggestionBox.SelectedItem.ToString());
+            }
+        }
+
+        private void searchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!suggestionPopup.IsOpen)
+                return;
+
+            if (e.Key == Key.Down)
+            {
+                suggestionBox.Focus();
+                suggestionBox.SelectedIndex = 0;
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Enter)
+            {
+                if (suggestionBox.SelectedItem != null)
+                {
+                    SelectSuggestion(suggestionBox.SelectedItem.ToString());
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == Key.Escape)
+            {
+                suggestionPopup.IsOpen = false;
+                e.Handled = true;
+            }
+        }
+
+        private void SelectSuggestion(string name)
+        {
+            suggestionPopup.IsOpen = false;
+
+            searchBox.TextChanged -= searchBox_TextChanged;
+            searchBox.Text = name;
+            searchBox.TextChanged += searchBox_TextChanged;
+
+            var fighter = FighterManager.GetFighter(name);
+            if (fighter != null)
+            {
+                LoadFighterData(fighter);
+            }
+
+            Keyboard.ClearFocus();
+        }
+
+        private void Box_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && suggestionBox.SelectedItem != null)
+            {
+                SelectSuggestion(suggestionBox.SelectedItem.ToString());
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Escape)
+            {
+                suggestionPopup.IsOpen = false;
+                searchBox.Focus();          
+                e.Handled = true;
+            }
         }
     }
 }

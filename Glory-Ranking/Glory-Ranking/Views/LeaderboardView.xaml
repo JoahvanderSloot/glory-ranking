@@ -43,13 +43,21 @@
 
         <!-- Open weight ranking Button -->
         <Button x:Name="openWeightRankingBtn"
-            Grid.Column="1"
-            VerticalAlignment="Top"
-            Margin="0,19,0,0"
-            Width="30" Height="30"
-            BorderBrush="{x:Null}"
-            Background="Transparent"
-            ToolTip="Open ranking" RenderTransformOrigin="0.4,0.967" Click="openWeightRankingBtn_Click">
+        MouseEnter="MouseHoverEnter"
+        MouseLeave="MouseHoverExit"
+        Grid.Column="1"
+        VerticalAlignment="Top"
+        Margin="0,19,0,0"
+        Width="30" Height="30"
+        BorderBrush="{x:Null}"
+        ToolTip="Open full leaderboard"
+        Click="openWeightRankingBtn_Click"
+        Foreground="{x:Null}"
+        RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
+            </Button.RenderTransform>
+
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Image Source="/Assets/Sprites/GoButtonSprite.png" Width="30" Height="30"/>

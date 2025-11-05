@@ -108,5 +108,10 @@ namespace Glory_Ranking
             FighterStorage.Reset();
             LoadFighters();
         }
+        public static List<Fighter> GetAllFighters()
+        {
+            LoadFighters();
+            return Fighters.ToList();
+        }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Diagnostics;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Glory_Ranking.Views
 {
@@ -102,6 +104,24 @@ namespace Glory_Ranking.Views
             var _leaderboard = new FullLeaderboard();
             _leaderboard.OpenLeaderboard(leaderboardDivision.SelectedIndex);
             _leaderboard.Show();
+        }
+
+        private void MouseHoverEnter(object sender, MouseEventArgs e)
+        {
+            if (openWeightRankingBtn.RenderTransform is ScaleTransform _st)
+            {
+                _st.ScaleX = 1.1;
+                _st.ScaleY = 1.1;
+            }
+        }
+
+        private void MouseHoverExit(object sender, MouseEventArgs e)
+        {
+            if (openWeightRankingBtn.RenderTransform is ScaleTransform _st)
+            {
+                _st.ScaleX = 1.0;
+                _st.ScaleY = 1.0;
+            }
         }
     }
 }
