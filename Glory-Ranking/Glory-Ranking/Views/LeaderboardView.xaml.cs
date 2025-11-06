@@ -76,17 +76,22 @@ namespace Glory_Ranking.Views
 
             bool _showRetired = retiredCheckbox.IsChecked == true;
 
+            // Automatically use the selected division if none is provided
+            if (!_division.HasValue && leaderboardDivision != null)
+            {
+                if (leaderboardDivision.SelectedIndex >= 0 && leaderboardDivision.SelectedIndex < 5)
+                    _division = leaderboardDivision.SelectedIndex + 1;
+                else if (leaderboardDivision.SelectedIndex == 5)
+                    _division = null;
+            }
+
             var _topFighters = FighterManager.Fighters.AsEnumerable();
 
             if (_division.HasValue)
-            {
                 _topFighters = _topFighters.Where(f => f.Division == _division.Value);
-            }
 
             if (!_showRetired)
-            {
                 _topFighters = _topFighters.Where(f => !f.Retired);
-            }
 
             _topFighters = _topFighters.OrderByDescending(f => f.Elo).Take(10);
 
