@@ -36,7 +36,18 @@ namespace Glory_Ranking.Views
 
         private void RetiredCheckbox_Changed(object sender, System.Windows.RoutedEventArgs e)
         {
-            RefreshLeaderboard();
+            int? _division = null;
+
+            if (leaderboardDivision.SelectedIndex >= 0 && leaderboardDivision.SelectedIndex < 5)
+            {
+                _division = leaderboardDivision.SelectedIndex + 1;
+            }
+            else if (leaderboardDivision.SelectedIndex == 5)
+            {
+                _division = null;
+            }
+
+            RefreshLeaderboard(_division);
         }
 
         private void leaderboardDivision_SelectionChanged(object sender, SelectionChangedEventArgs e)
