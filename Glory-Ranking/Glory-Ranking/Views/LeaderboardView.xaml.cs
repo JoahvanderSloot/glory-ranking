@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -15,11 +16,24 @@ namespace Glory_Ranking.Views
             retiredCheckbox.Unchecked += RetiredCheckbox_Changed;
 
             leaderboardBox.MouseDoubleClick += LeaderboardBox_MouseDoubleClick;
+            leaderboardBox.KeyDown += LeaderboardBox_KeyDown; // NEW
 
             RefreshLeaderboard();
         }
 
         private void LeaderboardBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            OpenSelectedFighter();
+        }
+
+        // --- NEW: Press Enter to open fighter ---
+        private void LeaderboardBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                OpenSelectedFighter();
+        }
+
+        private void OpenSelectedFighter()
         {
             if (leaderboardBox.SelectedItem == null) return;
 

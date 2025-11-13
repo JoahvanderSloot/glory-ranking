@@ -13,18 +13,17 @@ namespace Glory_Ranking
         public FullLeaderboard()
         {
             InitializeComponent();
+
+            // Allow pressing Enter to open selected fighter
+            fullLeaderboardList.KeyDown += LeaderboardBox_KeyDown;
         }
 
-        // --- Open leaderboard for given weight class ---
         public void OpenLeaderboard(int _weightClass)
         {
-            // Close any existing leaderboard before opening a new one
             if (currentOpenWindow != null && currentOpenWindow != this)
-            {
                 currentOpenWindow.Close();
-            }
-            currentOpenWindow = this;
 
+            currentOpenWindow = this;
             currentDivision = _weightClass;
 
             string _divisionName = _weightClass switch
@@ -44,7 +43,6 @@ namespace Glory_Ranking
             Activate();
         }
 
-        // --- Refresh list based on division and retired checkbox ---
         private void RefreshLeaderboard()
         {
             if (fullLeaderboardList == null) return;
@@ -53,18 +51,14 @@ namespace Glory_Ranking
 
             var _fighters = FighterManager.Fighters.AsEnumerable();
 
-            // Filter by division
             if (currentDivision >= 0 && currentDivision < 5)
                 _fighters = _fighters.Where(f => f.Division == currentDivision + 1);
 
-            // Hide retired if not checked
             if (retiredCheckbox.IsChecked != true)
                 _fighters = _fighters.Where(f => !f.Retired);
 
-            // Sort by Elo descending
             _fighters = _fighters.OrderByDescending(f => f.Elo);
 
-            // Build the leaderboard list
             int _rank = 1;
             foreach (var f in _fighters)
             {
@@ -78,44 +72,53 @@ namespace Glory_Ranking
                     _ => "None"
                 };
 
-                // Add #number in front
-                string _entry = $"#{_rank}. {f.Name} - Elo: {f.Elo} ({_weightName})";
+                // Show weight class only for "All Weightclasses"
+                string _entry = currentDivision == 5
+                    ? $"#{_rank}. {f.Name} - Elo: {f.Elo} ({_weightName})"
+                    : $"#{_rank}. {f.Name} - Elo: {f.Elo}";
+
                 fullLeaderboardList.Items.Add(_entry);
                 _rank++;
             }
 
-            // Handle empty list
             if (!_fighters.Any())
                 fullLeaderboardList.Items.Add("No fighters in this division yet.");
         }
 
-        // --- Update when checkbox toggled ---
         private void RetiredCheckbox_Changed(object sender, RoutedEventArgs e)
         {
             RefreshLeaderboard();
         }
 
-        // --- Double-click to open fighter window ---
         private void LeaderboardBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            OpenSelectedFighter();
+        }
+
+        // --- NEW: Press Enter to open selected fighter ---
+        private void LeaderboardBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                OpenSelectedFighter();
+        }
+
+        private void OpenSelectedFighter()
         {
             if (fullLeaderboardList.SelectedItem == null) return;
 
             string _selectedText = fullLeaderboardList.SelectedItem.ToString();
+            int _startIndex = _selectedText.IndexOf(". ");
+            int _endIndex = _selectedText.IndexOf(" - Elo:");
 
-            // Extract fighter name between ". " and " - Elo:"
-            int startIndex = _selectedText.IndexOf(". ");
-            int endIndex = _selectedText.IndexOf(" - Elo:");
+            if (_startIndex < 0 || _endIndex < 0 || _endIndex <= _startIndex) return;
 
-            if (startIndex < 0 || endIndex < 0 || endIndex <= startIndex) return;
-
-            string _fighterName = _selectedText.Substring(startIndex + 2, endIndex - (startIndex + 2));
+            string _fighterName = _selectedText.Substring(_startIndex + 2, _endIndex - (_startIndex + 2));
 
             var _fighterWindow = new FighterWindow();
             _fighterWindow.OpenFighter(_fighterName);
             _fighterWindow.Show();
         }
 
-        // --- Cleanup when window closes ---
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
